@@ -1,13 +1,13 @@
 package facility;
 
 public class FacilityDetail {
-	public String	 name;
-	public String 	info;
-	public int		capacity;
+	private String	name;
+	private String 	info;
+	private int			capacity;
 
 	public FacilityDetail( String name, String info, int capacity) {
-		this.name = name;
-		this.info = info;
+		this.name 		= name;
+		this.info 		= info;
 		this.capacity = capacity;
 	}
 
@@ -17,7 +17,7 @@ public class FacilityDetail {
 	}
 
 	public String getName(){
-		return this.name
+		return this.name;
 	}
 
 	public void setInfo(info){
@@ -26,7 +26,7 @@ public class FacilityDetail {
 	}
 
 	public String getInfo(){
-		return this.info
+		return this.info;
 	}
 
 	public void setCapacity(capacity){
@@ -35,6 +35,6 @@ public class FacilityDetail {
 	}
 
 	public int getCapacity(){
-		return this.capacity
+		return this.capacity;
 	}
 }
