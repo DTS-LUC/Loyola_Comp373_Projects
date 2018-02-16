@@ -8,7 +8,7 @@ public class Inspection {
 	private String 				inspector;
 	private String 				info;
 
-	public Inspection(String time, String inspector, String info){
+	public Inspection(LocalDateTime time, String inspector, String info){
 		this.time 			=	time;
 		this.inspector	=	inspector;
 		this.info				=	info;
