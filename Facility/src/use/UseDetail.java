@@ -22,7 +22,6 @@ public class UseDetail {
 		}
 
 		public LocalDateTime getTime(){
-			// NOTE: Could also convert to string here
 			return this.time
 		}
 

@@ -10,39 +10,53 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Use extends FacilityDetail{
-	// TODO: Probably not calling these properly
-	public List<UseDetail> 	usageHistory;
-	public List<Inspection>	inspections;
+
+	private ArrayList<UseDetail> 	usageHistory = new ArrayList<UseDetail>;
+	private ArrayList<Inspection>	inspections = new ArrayList<Inspection>;
+
+	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 	public Use(String name, String info, int capacity) {
 		super(name, info, capacity);
 	}
 
 	public bool objectIsInUseDuringInterval(String time){
-		// TODO
+		LocalDateTime reservation = LocalDateTime.parse(time, formatter);
+		reservation = reservation.format(formatter);
+		for (int i = 0; i < usageHistory.size(); i++) {
+			if (reservation = usageHistory.get(i).getTime()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void assignFacilityToUse(String time, String name, String info){
-		// TODO Perform check to see if it is in use;
-		// true - give error to system
-		// false - create UseDetail object
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		// Perform check to see if it is in use;
+		if (objectIsInUseDuringInterval(time)) {return;}
+
 		time = LocalDateTime.parse(time, formatter);
 		time = time.format(formatter);
+
+		UseDetail reservation = new UseDetail(time, name, info);
+		usageHistory.add(reservation);
 	}
 
 	public void vacateFacility(String time){
-		// TODO Create a special vacate event & call assignFacilityToUse()
+		String name = "RESERVED";
+		String info = "Facility has been asked to be vacated";
+		if (objectIsInUseDuringInterval(time)) {
+			// TODO Remove any existing reservation
+		}
+		assignFacilityToUse(time, name, info);
 	}
 
-	public List listInspections(){
-		// TODO unpack inspections object
-		// Return list or concated String
+	public ArrayList<Inspection> listInspections(){
+		return this.inspections;
 	}
 
-	public List listActualUsage(){
-		// TODO unpack usageHistory object
-		// Return list or concated String
+	public ArrayList<UseDetail> listActualUsage(){
+		return this.usageHistory;
 	}
 
 	public double calcUsageRate(){
