@@ -11,7 +11,7 @@ public class Request extends Issue {
     private final SimpleDateFormat 	sdf;
 
     //create new request without existing issue
-    public Request(String details, Double time, Double cost) {
+    public Request(String details, long time, long cost) {
         super(details, time, cost);
         this.sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         Date created = new Date();
@@ -24,6 +24,13 @@ public class Request extends Issue {
         this.sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         Date created = new Date();
         this.dateCreated = sdf.format(created); //use current date when created
+    }
+
+    public String toString(){
+      return ("Request: [ Created: " + dateCreated +
+              " Details: " + this.getDetails() +
+              " Estimated Time: " + this.getTime()+
+              " Cost: " + this.getCost()+ " ]");
     }
 
     public void setDateCreated(String created){ this.dateCreated = created;}

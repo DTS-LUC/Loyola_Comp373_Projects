@@ -83,7 +83,11 @@ public class Use extends FacilityDetail{
 		return this.usageHistory;
 	}
 
-//	public double calcUsageRate(){
-//		// TODO calculate usage(hrs) per day
-//	}
+	public long calcUsageRate() throws ParseException{
+		long useTime = 0;
+		for (UseDetail use : this.listActualUsage()) {
+			useTime += use.getDuration();
+		}
+		return 0;
+	}
 }

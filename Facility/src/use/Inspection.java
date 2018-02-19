@@ -1,41 +1,18 @@
 package use;
 
-public class Inspection {
+public class Inspection extends UseDetail{
 
-	private String start;
-	private String end;
 	private String inspector;
-	private String info;
 
 	public Inspection(String start, String end, String inspector, String info){
-		this.start			= start;
-		this.end				=	end;
+		super(start, end, "Inspection", info);
 		this.inspector	=	inspector;
-		this.info				=	info;
 	}
 
 	public String toString(){
 		return ("Inspection: [Performed by: " + this.inspector
-						+ ", Start: " + this.start + ", End: "
-						+ this.end + " Info: " + this.info+ " ]");
-	}
-
-	public void setStart(String start){
-		this.start 	= start;
-		return;
-	}
-
-	public String getStart(){
-		return this.start;
-	}
-
-	public void setEnd(String end){
-		this.end = end;
-		return;
-	}
-
-	public String getEnd(){
-		return this.end;
+						+ ", Start: " + this.getStart() + ", End: "
+						+ this.getEnd() + " Info: " + this.getInfo()+ " ]");
 	}
 
 	public void setInspector(String inspector){
@@ -45,14 +22,5 @@ public class Inspection {
 
 	public String getInspector(){
 		return this.inspector;
-	}
-
-	public void setInfo(String info){
-		this.info = info;
-		return;
-	}
-
-	public String getInfo(){
-		return this.info;
 	}
 }

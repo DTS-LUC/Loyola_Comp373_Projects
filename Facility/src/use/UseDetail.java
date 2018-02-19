@@ -1,5 +1,10 @@
 package use;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
+
 public class UseDetail {
 
 	private String start;
@@ -7,11 +12,14 @@ public class UseDetail {
 	private String name;
 	private String info;
 
+	private final SimpleDateFormat 	sdf;
+
 	public UseDetail(String start, String end, String name, String info){
 		this.start	= start;
 		this.end		=	end;
 		this.name 	= name;
 		this.info 	= info;
+		this.sdf	= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 	}
 
 	public String toString(){
@@ -36,6 +44,14 @@ public class UseDetail {
 
 	public String getEnd(){
 		return this.end;
+	}
+
+	public long getDuration() throws ParseException{
+		Date dateStart = sdf.parse(this.getStart());
+		Date dateEnd = sdf.parse(this.getEnd());
+		long milliseconds = dateEnd.getTime() - dateStart.getTime();
+		long hours   = ((milliseconds / (1000*60*60)) % 24);
+		return hours;
 	}
 
 	public void setName(String name){
