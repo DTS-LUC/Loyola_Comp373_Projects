@@ -38,7 +38,7 @@ public class UseDetail {
 	}
 
 	public String getName(){
-		return this.name
+		return this.name;
 	}
 
 	public void setInfo(String info){
@@ -47,6 +47,6 @@ public class UseDetail {
 	}
 
 	public String getInfo(){
-		return this.info
+		return this.info;
 	}
 }

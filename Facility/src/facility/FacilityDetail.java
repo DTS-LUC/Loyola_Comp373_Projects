@@ -11,7 +11,7 @@ public class FacilityDetail {
 		this.capacity = capacity;
 	}
 
-	public void setName(name){
+	public void setName(String name){
 		this.name = name;
 		return;
 	}
@@ -20,7 +20,7 @@ public class FacilityDetail {
 		return this.name;
 	}
 
-	public void setInfo(info){
+	public void setInfo(String info){
 		this.info = info;
 		return;
 	}
@@ -29,7 +29,7 @@ public class FacilityDetail {
 		return this.info;
 	}
 
-	public void setCapacity(capacity){
+	public void setCapacity(int capacity){
 		this.capacity = capacity;
 		return;
 	}

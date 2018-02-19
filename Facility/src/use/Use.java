@@ -1,8 +1,8 @@
 package use;
 
-import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import facility.FacilityDetail;
@@ -13,20 +13,20 @@ public class Use extends FacilityDetail{
 
 	private ArrayList<UseDetail> 	usageHistory;
 	private ArrayList<Inspection>	inspections;
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+	private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
 
 	public Use(String name, String info, int capacity) {
 		super(name, info, capacity);
 
-		usageHistory = new ArrayList<UseDetail>;
-		inspections = new ArrayList<Inspection>;
+		this.usageHistory = new ArrayList<UseDetail>();
+		this.inspections = new ArrayList<Inspection>();
 	}
 
-	public boolean objectIsInUseDuringInterval(String start, String end){
+	public boolean objectIsInUseDuringInterval(String start, String end) throws ParseException{
 		Date checkStart = sdf.parse(start);
 		Date checkEnd		= sdf.parse(end);
-		for (int i = 0;i < usageHistory.getLength(); i++) {
+		for (int i = 0;i < usageHistory.size(); i++) {
 			UseDetail reservation = usageHistory.get(i);
 
       Date reservationEnd = sdf.parse(reservation.getEnd());
@@ -40,17 +40,20 @@ public class Use extends FacilityDetail{
 		return false;
 	}
 
-	public void assignFacilityToUse(String start, String end, String name, String info){
-		if (objectIsInUseDuringInterval(start, end)){return;//TODO: Send a message to console}
+	public void assignFacilityToUse(String start, String end, String name, String info) throws ParseException{
+		if (objectIsInUseDuringInterval(start, end)){
+			System.out.println("Space is in use");
+			return;
+		}
 		UseDetail reservation = new UseDetail(start, end, name, info);
 		usageHistory.add(reservation);
 	}
 
-	public void vacateFacility(String start, String end){
+	public void vacateFacility(String start, String end) throws ParseException{
 		String name = "RESERVED";
 		String info = "Facility has been asked to be vacated";
 		if (objectIsInUseDuringInterval(start, end)) {
-
+			return;
 		}
 		assignFacilityToUse(start, end, name, info);
 	}
@@ -63,7 +66,7 @@ public class Use extends FacilityDetail{
 		return this.usageHistory;
 	}
 
-	public double calcUsageRate(){
-		// TODO calculate usage(hrs) per day
-	}
+//	public double calcUsageRate(){
+//		// TODO calculate usage(hrs) per day
+//	}
 }
