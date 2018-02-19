@@ -1,6 +1,9 @@
-import maintenance.Maintenance;
+package facility;
 
-public class Facility extends Maintenance{
+// import maintenance.Maintenance;
+import use.Use;
+
+public class Facility extends Use{
 	private ArrayList<Facility> subfacilities;
 
 	public Facility(String name, String info, int capacity){
@@ -8,11 +11,8 @@ public class Facility extends Maintenance{
 		subfacilities = new ArrayList<Facility>;
 	}
 
-	public boolean hasSubfacilities(){
-		if (subfacilities.length() > 0) {
-			return true;
-		}
-		return false;
+	public String toString(){
+		return ("Facility :[ Name : " + this.name + ", info : " + this.info + ", capacity :" + this.capacity+" ]");
 	}
 
 	public ArrayList<Facility> listFacilities(){
