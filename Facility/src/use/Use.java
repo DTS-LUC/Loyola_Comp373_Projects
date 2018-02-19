@@ -6,59 +6,40 @@ import facility.FacilityDetail;
 import use.UseDetail;
 import use.Inspection;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Use extends FacilityDetail{
 
 	private ArrayList<UseDetail> 	usageHistory;
 	private ArrayList<Inspection>	inspections;
-	private DateTimeFormatter formatter;
+
 
 	public Use(String name, String info, int capacity) {
 		super(name, info, capacity);
 
 		usageHistory = new ArrayList<UseDetail>;
 		inspections = new ArrayList<Inspection>;
-		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 	}
 
-	public bool objectIsInUseDuringInterval(String time){
-		LocalDateTime reservation = LocalDateTime.parse(time, formatter);
-		reservation = reservation.format(formatter);
-		for (int i = 0; i < usageHistory.size(); i++) {
-			if (reservation = usageHistory.get(i).getTime()) {
-				return true;
-			}
-		}
-		return false;
+	public boolean objectIsInUseDuringInterval(String start, String end){
+
 	}
 
-	public void assignFacilityToUse(String time, String name, String info){
+	public void assignFacilityToUse(String start, String end, String name, String info){
 		// Perform check to see if it is in use;
-		if (objectIsInUseDuringInterval(time)) {return;}
+		if (objectIsInUseDuringInterval(start, end)){return;}
 
-		time = LocalDateTime.parse(time, formatter);
-		time = time.format(formatter);
+		// TODO
 
-		UseDetail reservation = new UseDetail(time, name, info);
+		UseDetail reservation = new UseDetail(start, end, name, info);
 		usageHistory.add(reservation);
 	}
 
-	public void vacateFacility(String time){
+	public void vacateFacility(String start, String end){
 		String name = "RESERVED";
 		String info = "Facility has been asked to be vacated";
-		if (objectIsInUseDuringInterval(time)) {
-			LocalDateTime reservation = LocalDateTime.parse(time, formatter);
-			reservation = reservation.format(formatter);
-			for (int i = 0; i < usageHistory.size(); i++) {
-				if (reservation = usageHistory.get(i).getTime()) {
-					usageHistory.remove(i);
-					break;
-				}
-			}
+		if (objectIsInUseDuringInterval(start, end)) {
+
 		}
-		assignFacilityToUse(time, name, info);
+		assignFacilityToUse(start, end, name, info);
 	}
 
 	public ArrayList<Inspection> listInspections(){

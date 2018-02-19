@@ -1,29 +1,38 @@
 package use;
 
-import java.time.LocalDateTime;
-
 public class Inspection {
 
-	private LocalDateTime time;
-	private String 				inspector;
-	private String 				info;
+	private String start;
+	private String end;
+	private String inspector;
+	private String info;
 
-	public Inspection(LocalDateTime time, String inspector, String info){
-		this.time 			=	time;
+	public Inspection(String start, String end, String inspector, String info){
+		this.start			= start;
+		this.end				=	end;
 		this.inspector	=	inspector;
 		this.info				=	info;
 	}
 
-	public void setTime(time){
-		this.time = time;
+	public void setStart(String start){
+		this.start 	= start;
 		return;
 	}
 
-	public LocalDateTime getTime(){
-		return this.time;
+	public String getStart(){
+		return this.start;
 	}
 
-	public void setInspector(inspector){
+	public void setEnd(String end){
+		this.end = end;
+		return;
+	}
+
+	public String getEnd(){
+		return this.end;
+	}
+
+	public void setInspector(String inspector){
 		this.inspector = inspector;
 		return;
 	}
@@ -32,7 +41,7 @@ public class Inspection {
 		return this.inspector;
 	}
 
-	public void setInfo(info){
+	public void setInfo(String info){
 		this.info = info;
 		return;
 	}

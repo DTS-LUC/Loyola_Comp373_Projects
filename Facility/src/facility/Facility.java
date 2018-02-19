@@ -8,15 +8,22 @@ public class Facility extends Maintenance{
 		subfacilities = new ArrayList<Facility>;
 	}
 
-	public String listFacilities(){
-		// TODO Create list formatter
+	public boolean hasSubfacilities(){
+		if (subfacilities.length() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public ArrayList<Facility> listFacilities(){
+		return this.subfacilities;
 	}
 
 	public void addNewFacility(Facility subFacility){
 		subfacilities.add(subFacility);
 	}
 
-	public void removeFacility(){
-
+	public void removeFacility(Facility subFacility){
+		subfacilities.remove(subFacility);
 	}
 }

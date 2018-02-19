@@ -1,31 +1,40 @@
 package use;
 
-import java.time.LocalDateTime;
-
 public class UseDetail {
 
 	public class Inspection {
 
-		private LocalDateTime time;
+		private String start;
+		private String end;
 		private String name;
 		private String info;
 
-		public Inspection(LocalDateTime time, String name, String info){
-			this.time = time;
-			this.name = name;
-			this.info = info;
+		public Inspection(String start, String end, String name, String info){
+			this.start	= start;
+			this.end		=	end;
+			this.name 	= name;
+			this.info 	= info;
 		}
 
-		public void setTime(time){
-			this.time = time;
+		public void setStart(String start){
+			this.start 	= start;
 			return;
 		}
 
-		public LocalDateTime getTime(){
-			return this.time
+		public String getStart(){
+			return this.start;
 		}
 
-		public void setName(name){
+		public void setEnd(String end){
+			this.end = end;
+			return;
+		}
+
+		public String getEnd(){
+			return this.end;
+		}
+
+		public void setName(String name){
 			this.name = name;
 			return;
 		}
@@ -34,7 +43,7 @@ public class UseDetail {
 			return this.name
 		}
 
-		public void setInfo(info){
+		public void setInfo(String info){
 			this.info = info;
 			return;
 		}
