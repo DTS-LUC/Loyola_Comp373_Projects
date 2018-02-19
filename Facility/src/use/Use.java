@@ -33,13 +33,15 @@ public class Use extends FacilityDetail{
       Date reservationEnd = sdf.parse(reservation.getEnd());
       Date reservationStart = sdf.parse(reservation.getStart());
 
-			if ((checkStart.compareTo(reservationStart) >= 0 && checkStart.compareTo(reservationEnd) <= 0) ||
-						(checkEnd.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0)	) {
-					return true;
-				}
+      if((checkStart.compareTo(reservationStart) >= 0 && checkStart.compareTo(reservationEnd) <= 0) ||
+    		  (checkEnd.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0) ||
+    		  (checkStart.compareTo(reservationStart) <= 0 && checkEnd.compareTo(reservationEnd) >= 0) ||
+					(checkStart.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0)){
+						return true;
+					}
 			}
 			return false;
-	}
+		}
 
 	public void assignFacilityToUse(String start, String end, String name, String info) throws ParseException{
 		if (objectIsInUseDuringInterval(start, end)){
@@ -59,10 +61,11 @@ public class Use extends FacilityDetail{
       Date reservationEnd = sdf.parse(reservation.getEnd());
       Date reservationStart = sdf.parse(reservation.getStart());
 
-			if ((checkStart.compareTo(reservationStart) >= 0 && checkStart.compareTo(reservationEnd) <= 0) ||
-						(checkEnd.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0)	) {
+			if((checkStart.compareTo(reservationStart) >= 0 && checkStart.compareTo(reservationEnd) <= 0) ||
+    		  (checkEnd.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0) ||
+    		  (checkStart.compareTo(reservationStart) <= 0 && checkEnd.compareTo(reservationEnd) >= 0) ||
+					(checkStart.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0)){
 					this.usageHistory.remove(i);
-
 				}
 			}
 	}

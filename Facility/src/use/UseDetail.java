@@ -16,8 +16,8 @@ public class UseDetail {
 
 	public String toString(){
 		return ("Reservation: [Name: " + this.name
-						+ ", start: " + this.start + ", end: "
-						+ this.end + "info: " + this.info+ " ]");
+						+ ", Start: " + this.start + ", End: "
+						+ this.end + " Info: " + this.info+ " ]");
 	}
 
 	public void setStart(String start){

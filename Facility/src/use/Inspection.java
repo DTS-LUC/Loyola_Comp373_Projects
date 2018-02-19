@@ -14,6 +14,12 @@ public class Inspection {
 		this.info				=	info;
 	}
 
+	public String toString(){
+		return ("Inspection: [Performed by: " + this.inspector
+						+ ", Start: " + this.start + ", End: "
+						+ this.end + " Info: " + this.info+ " ]");
+	}
+
 	public void setStart(String start){
 		this.start 	= start;
 		return;

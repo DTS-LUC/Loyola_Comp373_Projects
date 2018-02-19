@@ -37,6 +37,27 @@ public class FacilityDemo {
 	 }
 	}
 
+	public void printInspections(Facility complex){
+	System.out.println("Inspections for "+ complex.getName());
+    for (Inspection complexUse : complex.listInspections()) {
+			System.out.println(complexUse);
+		}
+	 ArrayList<Facility> floors = complex.listFacilities();
+	 for(int f = 0; f < floors.size(); f++) {
+		System.out.println("Inspections for "+ floors.get(f).getName());
+		 for (Inspection floorUse : floors.get(f).listInspections()) {
+			 System.out.println(floorUse);
+		 }
+		ArrayList<Facility> rooms = floors.get(f).listFacilities();
+		for(int r = 0; r < rooms.size(); r++) {
+			System.out.println("Inspections for "+ rooms.get(r).getName());
+			for (Inspection roomUse : rooms.get(r).listInspections()) {
+				System.out.println(roomUse);
+			}
+		}
+	 }
+	}
+
 	public void printComplex(Facility complex){
 		System.out.println(complex);
     for (Facility floors : complex.listFacilities()) {
@@ -137,16 +158,28 @@ public class FacilityDemo {
 			tempRoom.assignFacilityToUse(start3, end3, "Reservation 4", "Example reservation");
 		}
 		demo.printReservations(ApartmentComplex);
-		String testStart = demo.reservationFormatter(2018, 1, 5, 11, 15);
-		String testEnd	= demo.reservationFormatter(2018, 1, 5, 12, 15);
+		String testStart = demo.reservationFormatter(2018, 1, 5, 11, 00);
+		String testEnd	= demo.reservationFormatter(2018, 1, 5, 12, 30);
 		// 14. Show objectIsInUseDuringInterval()
 		System.out.println(rooms.get(4).objectIsInUseDuringInterval(testStart, testEnd));
 		// 15. Vacate building
 		ApartmentComplex.vacateFacility(testStart, testEnd);
 		demo.printReservations(ApartmentComplex);
 		// 16. calcUsageRate()
+		
 		// 17. Add inspections
-		// 18. listInspections()
+		String inspection1Start = demo.reservationFormatter(2018, 1, 6, 11, 00);
+		String inspection1End	= demo.reservationFormatter(2018, 1, 6, 12, 00);
+		String inspection2Start = demo.reservationFormatter(2018, 1, 7, 11, 00);
+		String inspection2End	= demo.reservationFormatter(2018, 1, 7, 12, 00);
+		String inspection3Start = demo.reservationFormatter(2018, 8, 6, 11, 00);
+		String inspection3End	= demo.reservationFormatter(2018, 8, 6, 12, 00);
+
+		rooms.get(2).performInspection(inspection1Start, inspection1End, "Mr. Jones", "Example inspection");
+		rooms.get(2).performInspection(inspection2Start, inspection2End, "Mr. Smith", "Example inspection");
+		rooms.get(2).performInspection(inspection3Start, inspection3End, "Mr. James", "Example inspection");
+
+		demo.printInspections(ApartmentComplex);
 
   }
 }
