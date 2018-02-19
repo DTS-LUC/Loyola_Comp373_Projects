@@ -1,5 +1,7 @@
 package facility;
 
+import java.util.ArrayList;
+
 // import maintenance.Maintenance;
 import use.Use;
 
@@ -8,11 +10,11 @@ public class Facility extends Use{
 
 	public Facility(String name, String info, int capacity){
 		super(name, info, capacity);
-		subfacilities = new ArrayList<Facility>;
+		subfacilities = new ArrayList<Facility>();
 	}
 
 	public String toString(){
-		return ("Facility :[ Name : " + this.name + ", info : " + this.info + ", capacity :" + this.capacity+" ]");
+		return ("Facility :[ Name : " + this.getName() + ", info : " + this.getInfo() + ", capacity :" + this.getCapacity()+" ]");
 	}
 
 	public ArrayList<Facility> listFacilities(){

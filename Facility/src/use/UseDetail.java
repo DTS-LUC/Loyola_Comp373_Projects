@@ -14,6 +14,12 @@ public class UseDetail {
 		this.info 	= info;
 	}
 
+	public String toString(){
+		return ("Reservation: [Name: " + this.name
+						+ ", start: " + this.start + ", end: "
+						+ this.end + "info: " + this.info+ " ]");
+	}
+
 	public void setStart(String start){
 		this.start 	= start;
 		return;
