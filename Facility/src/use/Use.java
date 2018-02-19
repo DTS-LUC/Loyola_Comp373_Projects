@@ -33,8 +33,8 @@ public class Use extends FacilityDetail{
       Date reservationEnd = sdf.parse(reservation.getEnd());
       Date reservationStart = sdf.parse(reservation.getStart());
 
-			if ((checkStart.compareTo(reservationStart) > 0 && checkStart.compareTo(reservationEnd) < 0) ||
-						(checkEnd.compareTo(reservationStart) > 0 && checkEnd.compareTo(reservationEnd) < 0)	) {
+			if ((checkStart.compareTo(reservationStart) >= 0 && checkStart.compareTo(reservationEnd) <= 0) ||
+						(checkEnd.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0)	) {
 					return true;
 				}
 			}
@@ -59,18 +59,12 @@ public class Use extends FacilityDetail{
       Date reservationEnd = sdf.parse(reservation.getEnd());
       Date reservationStart = sdf.parse(reservation.getStart());
 
-			if ((checkStart.compareTo(reservationStart) > 0 && checkStart.compareTo(reservationEnd) < 0) ||
-						(checkEnd.compareTo(reservationStart) > 0 && checkEnd.compareTo(reservationEnd) < 0)	) {
+			if ((checkStart.compareTo(reservationStart) >= 0 && checkStart.compareTo(reservationEnd) <= 0) ||
+						(checkEnd.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0)	) {
 					this.usageHistory.remove(i);
+
 				}
 			}
-	}
-
-	public void vacateFacility(String start, String end) throws ParseException{
-		String name = "RESERVED";
-		String info = "Facility has been asked to be vacated";
-		removeObjectsDuringInterval(start, end);
-		assignFacilityToUse(start, end, name, info);
 	}
 
 	public void performInspection(String start, String end, String inspector, String info){

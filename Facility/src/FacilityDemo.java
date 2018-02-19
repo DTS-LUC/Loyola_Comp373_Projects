@@ -137,12 +137,16 @@ public class FacilityDemo {
 			tempRoom.assignFacilityToUse(start3, end3, "Reservation 4", "Example reservation");
 		}
 		demo.printReservations(ApartmentComplex);
+		String testStart = demo.reservationFormatter(2018, 1, 5, 11, 15);
+		String testEnd	= demo.reservationFormatter(2018, 1, 5, 12, 15);
 		// 14. Show objectIsInUseDuringInterval()
-		// 15. Reserve floor (Vacate subfacilities)
-		// 16. listActualUsage()
-		// 17. calcUsageRate()
-		// 18. Add inspections
-		// 19. listInspections()
+		System.out.println(rooms.get(4).objectIsInUseDuringInterval(testStart, testEnd));
+		// 15. Vacate building
+		ApartmentComplex.vacateFacility(testStart, testEnd);
+		demo.printReservations(ApartmentComplex);
+		// 16. calcUsageRate()
+		// 17. Add inspections
+		// 18. listInspections()
 
   }
 }
