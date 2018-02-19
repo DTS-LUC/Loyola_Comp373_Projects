@@ -1,61 +1,53 @@
 package maintenance;
 
-import facility.FacilityUnit;
+import use.Use;
+import maintenance.Issue;
+import maintenance.Record;
+import maintenance.Request;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class FacilityMaintenance {
+public class Maintenance extends Use{
 
-    private FacilityUnit facility;
+    private ArrayList<Issue> facilityIssues;
+    private ArrayList<Request> maintenanceRequests;
+    private ArrayList<Record> maintenanceRecords;
 
-    public FacilityMaintenance(FacilityUnit facility) {
-        this.facility = facility;
+    public Maintenance(String name, String info, int capacity) {
+  		super(name, info, capacity);
+
+      this.facilityIssues     = new ArrayList<Issue>();
+      this.maintenanceRequests = new ArrayList<Request>();
+      this.maintenanceRecords  = new ArrayList<Record>();
     }
 
-    private List<Issue> maintenance = new ArrayList<Issue>();
+    public void addIssue(Issue issue) { facilityIssues.add(issue); }
 
-    public void addIssue(Issue issue) { maintenance.add(issue); }
+    public void removeIssue(Issue fixed) { facilityIssues.remove(fixed);}
 
-    public void removeIssue(Issue old) {
-        maintenance.remove(old);
+    public ArrayList<Issue> listIssues() { return this.facilityIssues;}
+
+    public void makeFacilityMaintRequest(String details, Double time, Double cost){
+      Request request = new Request(details, time, cost);
+      maintenanceRequests.add(request);
     }
 
-    public List<Issue> listIssues() {
-        List<Issue> issues = new ArrayList<Issue>(maintenance);
-        for (FacilityUnit fac : facility.getSubUnits()) {
-            issues.addAll(fac.getFacilityMaintenance().listIssues());
-        }
-        return issues;
+    public void makeFacilityMaintRequest(Issue issue){
+      Request request = new Request(issue);
+      maintenanceRequests.add(request);
     }
 
-    public List<Request> listRequests() {
-        List<Request> requests = new ArrayList<Request>();
-        for (Issue i : maintenance) {
-            if (i instanceof Request) {
-                requests.add((Request)i);
-            }
-        }
-        for (FacilityUnit fac : facility.getSubUnits()) {
-            requests.addAll(fac.getFacilityMaintenance().listRequests());
-        }
-        return requests;
+    public ArrayList<Request> listRequests() {return this.maintenanceRequests;}
+
+    public void addMaintRecord(Request request, String dateCompleted, String workerName){
+      request.setComplete();
+      Record record = new Record(request, dateCompleted, workerName);
+      maintenanceRecords.add(record);
     }
 
-    public List<Record> listRecords() {
-        List<Record> records = new ArrayList<Record>();
-        for (Issue i : maintenance) {
-            if (i instanceof Record) {
-                records.add((Record) i);
-            }
-        }
-        for (FacilityUnit fac : facility.getSubUnits()) {
-            records.addAll(fac.getFacilityMaintenance().listRecords());
-        }
-        return records;
-    }
+    public ArrayList<Record> listRecords() {return this.maintenanceRecords;}
 
-    public double calcMaintenanceCost() {
+   /* public double calcMaintenanceCost() {
         double sum = 0;
         for (Issue i : maintenance) {
             if (i instanceof Record) {
@@ -67,5 +59,5 @@ public class FacilityMaintenance {
             sum += fac.getFacilityMaintenance().calcMaintenanceCost();
         }
         return sum;
-    }
+    }*/
 }

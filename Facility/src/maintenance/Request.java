@@ -1,46 +1,36 @@
 package maintenance;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import facility.FacilityUnit;
 
 public class Request extends Issue {
 
     //default access is package private so that subclasses may use them directly
-    Date dateCreated;
-    Date scheduledDate;
-    boolean complete = false;
-
+    private String  dateCreated;
+    private boolean complete;
+    private final SimpleDateFormat 	sdf;
 
     //create new request without existing issue
-    public Request(FacilityUnit facility) {
-        super(facility);
-        this.dateCreated = new Date(); //use current date when created
+    public Request(String details, Double time, Double cost) {
+        super(details, time, cost);
+        this.sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        Date created = new Date();
+        this.dateCreated = sdf.format(created); //use current date when created
     }
 
     //create new request from existing issue
     public Request(Issue issue) {
-        super(issue.facility);
-        this.dateCreated = new Date();
-        this.cost = issue.cost;
-        this.details = issue.details;
-        facility.getFacilityMaintenance().removeIssue(issue);
+        super(issue.getDetails(), issue.getTime(), issue.getCost());
+        this.sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        Date created = new Date();
+        this.dateCreated = sdf.format(created); //use current date when created
     }
 
-    public Date getDateCreated() { return dateCreated; }
+    public void setDateCreated(String created){ this.dateCreated = created;}
+    public String getDateCreated() { return this.dateCreated; }
 
-    public void scheduleDate(Date date) {
-        this.scheduledDate = date;
-    }
-
-    public Date getScheduledDate() { return scheduledDate; }
-
-    public boolean isComplete() {
-        return complete;
-    }
-
+    public boolean isComplete() { return complete;}
     //keep record of request once completed
-    public Record setComplete() {
-        complete = true;
-        return new Record(this);
-    }
-}
+    public void setComplete() { complete = true;}
+    public void setIncomplete() { complete = false;}
+  }

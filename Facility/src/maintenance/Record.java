@@ -1,19 +1,26 @@
 package maintenance;
 
-import java.util.Date;
-
 public class Record extends Request {
 
-    private Date maintenanceDate;
+    String  dateCompleted;
+    String  workerName;
 
-    public Record(Request request) {
-        super(request);
-        maintenanceDate = new Date();
-        this.complete = true;
-        this.dateCreated = request.dateCreated;
-        this.scheduledDate = request.scheduledDate;
-        facility.getFacilityMaintenance().removeIssue(request);
+    public Record(Request request, String dateCompleted, String workerName) {
+      super(request);
+      this.dateCompleted = dateCompleted;
+      this.workerName = workerName;
     }
 
-    public Date getMaintenanceDate() { return maintenanceDate; }
+    // TODO Calc actual time to repair and reset for issue
+
+    public String toString(){
+      return ("Record: [ Completed by: " + this.getWorkerName() +" Requested: " + this.getDateCreated()
+  						+ ", Completed: " + this.getDateCompleted() + ", Details: "
+  						+ this.getDetails() + " Cost: " + this.getCost()+ " ]");
+    }
+
+    public String getDateCompleted() { return this.dateCompleted;}
+    public void setDateCompleted(String dateCompleted) { this.dateCompleted = dateCompleted;}
+    public String getWorkerName(){ return this.workerName;}
+    public void setWorkerName(String workerName){ this.workerName = workerName;}
 }
