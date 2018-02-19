@@ -1,6 +1,9 @@
 package use;
 
 import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import facility.FacilityDetail;
 import use.UseDetail;
@@ -10,6 +13,7 @@ public class Use extends FacilityDetail{
 
 	private ArrayList<UseDetail> 	usageHistory;
 	private ArrayList<Inspection>	inspections;
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
 
 	public Use(String name, String info, int capacity) {
@@ -20,15 +24,24 @@ public class Use extends FacilityDetail{
 	}
 
 	public boolean objectIsInUseDuringInterval(String start, String end){
+		Date checkStart = sdf.parse(start);
+		Date checkEnd		= sdf.parse(end);
+		for (int i = 0;i < usageHistory.getLength(); i++) {
+			UseDetail reservation = usageHistory.get(i);
 
+      Date reservationEnd = sdf.parse(reservation.getEnd());
+      Date reservationStart = sdf.parse(reservation.getStart());
+
+			if ((checkStart.compareTo(reservationStart) > 0 && checkStart.compareTo(reservationEnd) < 0) ||
+						(checkEnd.compareTo(reservationStart) > 0 && checkEnd.compareTo(reservationEnd) < 0)	) {
+					return true;
+			}
+		}
+		return false;
 	}
 
 	public void assignFacilityToUse(String start, String end, String name, String info){
-		// Perform check to see if it is in use;
-		if (objectIsInUseDuringInterval(start, end)){return;}
-
-		// TODO
-
+		if (objectIsInUseDuringInterval(start, end)){return;//TODO: Send a message to console}
 		UseDetail reservation = new UseDetail(start, end, name, info);
 		usageHistory.add(reservation);
 	}
