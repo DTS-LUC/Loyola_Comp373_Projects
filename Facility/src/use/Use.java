@@ -83,11 +83,12 @@ public class Use extends FacilityDetail{
 		return this.usageHistory;
 	}
 
-	public long calcUsageRate() throws ParseException{
+	public double calcUsageRate() throws ParseException{
 		long useTime = 0;
 		for (UseDetail use : this.listActualUsage()) {
 			useTime += use.getDuration();
 		}
-		return 0;
+		double usePerRes = useTime/(double)(this.listActualUsage().size());
+		return usePerRes;
 	}
 }

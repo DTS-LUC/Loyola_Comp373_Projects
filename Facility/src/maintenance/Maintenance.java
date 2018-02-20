@@ -45,7 +45,6 @@ public class Maintenance extends Use{
   public ArrayList<Request> listRequests() {return this.maintenanceRequests;}
 
   public void addMaintRecord(Request request, String dateCompleted, String workerName){
-    // TODO: Remove from issues
     request.setComplete();
     Record record = new Record(request, dateCompleted, workerName);
     maintenanceRecords.add(record);
@@ -69,11 +68,12 @@ public class Maintenance extends Use{
      return time;
   }
 
-  public long calcProblemRate(){
+  public double calcProblemRate(){
     // Problem rate = Issues per use
-    int issues = this.listIssues().size();
-    int uses   = this.listActualUsage().size();
-    long rate = issues/uses;
-    return (rate);
+    double issues = this.listIssues().size();
+    double uses   = this.listActualUsage().size();
+    double rate = issues/uses;
+
+    return rate;
   }
 }

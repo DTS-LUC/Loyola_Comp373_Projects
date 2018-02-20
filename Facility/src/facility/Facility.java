@@ -49,19 +49,19 @@ public class Facility extends Maintenance{
 
 	public long totalMaintenanceCost(){
 		long subCosts = 0;
-		for (Facility subFacility : this.listFacilities()) {
-			subCosts += subFacility.calcMaintenanceCost();
+		for (Facility subFacility : listFacilities()) {
+			subCosts += subFacility.totalMaintenanceCost();
 		}
 		long costs = this.calcMaintenanceCost() + subCosts;
 		return costs;
 	}
 
-	public long avgTotalProblemRate(){
+	public double avgTotalProblemRate(){
 		long sumRate = 0;
-		for (Facility subFacility : this.listFacilities()) {
+		for (Facility subFacility : listFacilities()) {
 			sumRate += subFacility.calcProblemRate();
 		}
-		long avg = sumRate / this.numFacilities();
+		double avg = sumRate / this.numFacilities();
 		return avg;
 	}
 }

@@ -19,15 +19,15 @@ public class Issue {
               " Cost: " + this.getCost()+ " ]");
     }
 
-    public String getDetails() { return details; }
+    public String getDetails() { return this.details; }
 
     public void setDetails(String details) { this.details = details; }
 
-    public long getTime() { return time; }
+    public long getTime() { return this.time; }
 
     public void setTime(long time) { this.time = time; }
 
-    public long getCost() { return cost; }
+    public long getCost() { return this.cost; }
 
     public void setCost(long cost) { this.cost = cost; }
 }

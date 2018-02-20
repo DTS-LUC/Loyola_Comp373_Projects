@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import facility.Facility;
@@ -98,7 +99,7 @@ class DemoTools{
     }
   }
 
-  public void makeReservations(ArrayList<Facility> rooms){
+  public void makeReservations(ArrayList<Facility> rooms) throws ParseException{
     for (int q = 0; q < rooms.size(); q++) {
 			Facility tempRoom = rooms.get(q);
 			String start0 	= reservationFormatter(2018, 1, 5, 8, 15);
@@ -156,9 +157,86 @@ class DemoTools{
     for (int q = 0; q < rooms.size(); q++) {
       Facility tempRoom = rooms.get(q);
       for (Request request : tempRoom.listRequests()) {
-//    	  TODO add date and worker for tests
+    	  String date	= reservationFormatter(2018, 1, 9, 8, 00);
+    	  String worker = "Tom";
         tempRoom.addMaintRecord(request, date, worker);
       }
     }
   }
+
+	public void printIssues(Facility complex){
+		System.out.println(complex.getName());
+		System.out.println(complex.listIssues());
+		for (Facility floors : complex.listFacilities()) {
+			System.out.println(floors.getName());
+		   System.out.println(floors.listIssues());
+		   for (Facility rooms : floors.listFacilities()) {
+				 System.out.println(rooms.getName());
+		      System.out.println(rooms.listIssues());
+		   }
+		  }
+	}
+
+	public void printRequests(Facility complex){
+		System.out.println(complex.getName());
+		System.out.println(complex.listRequests());
+    for (Facility floors : complex.listFacilities()) {
+			System.out.println(floors.getName());
+			 System.out.println(floors.listRequests());
+       for (Facility rooms : floors.listFacilities()) {
+					System.out.println(rooms.getName());
+					System.out.println(rooms.listRequests());
+       }
+    }
+	}
+
+	public void printRecords(Facility complex){
+		System.out.println(complex.getName());
+		System.out.println(complex.listRecords());
+    for (Facility floors : complex.listFacilities()) {
+				System.out.println(floors.getName());
+       System.out.println(floors.listRecords());
+       for (Facility rooms : floors.listFacilities()) {
+				 System.out.println(rooms.getName());
+          System.out.println(rooms.listRecords());
+       }
+    }
+	}
+
+	public void printDownTimes(Facility complex){
+		System.out.println(complex.getName());
+		System.out.println(complex.calcDowntime()+ " hrs");
+    for (Facility floors : complex.listFacilities()) {
+				System.out.println(floors.getName());
+       System.out.println(floors.calcDowntime()+ " hrs");
+       for (Facility rooms : floors.listFacilities()) {
+				 System.out.println(rooms.getName());
+          System.out.println(rooms.calcDowntime()+ " hrs");
+       }
+    }
+	}
+
+	public void printProblemRate(Facility complex){
+		System.out.println(complex.getName());
+		System.out.println(complex.calcProblemRate()+ " Issues per use");
+    for (Facility floors : complex.listFacilities()) {
+				System.out.println(floors.getName());
+       System.out.println(floors.calcProblemRate()+ " Issues per use");
+       for (Facility rooms : floors.listFacilities()) {
+				 System.out.println(rooms.getName());
+          System.out.println(rooms.calcProblemRate()+ " Issues per use");
+       }
+    }
+	}
+
+	public void printUsageRates(Facility complex) throws ParseException{
+		System.out.println(complex);
+		for (Facility floors : complex.listFacilities()) {
+			 System.out.println(floors);
+			 for (Facility rooms : floors.listFacilities()) {
+					System.out.println(rooms);
+					System.out.println(rooms.calcUsageRate() + " hours per use");
+			 }
+		}
+	}
 }
