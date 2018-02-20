@@ -11,8 +11,6 @@ public class Record extends Request {
       this.workerName = workerName;
     }
 
-    // TODO Calc actual time to repair and reset for issue
-
     public String toString(){
       return ("Record: [ Completed by: " + this.getWorkerName() +" Requested: " + this.getDateCreated()
   						+ ", Completed: " + this.getDateCompleted() + ", Details: "

@@ -20,7 +20,7 @@ public class Request extends Issue {
 
     //create new request from existing issue
     public Request(Issue issue) {
-        super(issue.getDetails(), issue.getTime(), issue.getCost());
+        super(issue.getDetails(), issue.getTime(), issue.getCost(), issue.getID());
         this.sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         Date created = new Date();
         this.dateCreated = sdf.format(created); //use current date when created

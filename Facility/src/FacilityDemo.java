@@ -37,34 +37,36 @@ public class FacilityDemo {
 		rooms.addAll(floor2.listFacilities());
 		rooms.addAll(floor3.listFacilities());
 		demo.makeReservations(rooms);
-		//demo.printReservations(ApartmentComplex);
+		demo.printReservations(ApartmentComplex);
 		String testStart = demo.reservationFormatter(2018, 1, 5, 11, 00);
 		String testEnd	= demo.reservationFormatter(2018, 1, 5, 12, 30);
 		// Show objectIsInUseDuringInterval()
 		System.out.println(rooms.get(4).objectIsInUseDuringInterval(testStart, testEnd));
 		// Vacate building
 		ApartmentComplex.vacateFacility(testStart, testEnd);
-		//demo.printReservations(ApartmentComplex);
-		// TODO calcUsageRate()
+		demo.printReservations(ApartmentComplex);
+		// Show UsageRate
 		demo.printUsageRates(ApartmentComplex);
 		// Add inspections
 		demo.makeInspections(rooms);
-		//demo.printInspections(ApartmentComplex);
+		demo.printInspections(ApartmentComplex);
 		// Make room maintenance requests
 		demo.addIssues(rooms);
-		//demo.printIssues(ApartmentComplex);
+		demo.printIssues(ApartmentComplex);
 		// listMaintRequest();
 		demo.addRequests(rooms);
-		//demo.printRequests(ApartmentComplex);
+		demo.printRequests(ApartmentComplex);
 		// Schedule maintenance
 		demo.performMaint(rooms);
+		demo.printIssues(ApartmentComplex);
+
 		// listMaintenance();
-		//demo.printRecords(ApartmentComplex);
+		demo.printRecords(ApartmentComplex);
 		// calculate cost
 		System.out.println("$" + ApartmentComplex.totalMaintenanceCost());
 		// Get down Time
 		demo.printDownTimes(ApartmentComplex);
-		// // calcProblemRate()
+		// calcProblemRate()
 		demo.printProblemRate(ApartmentComplex);
 
   }

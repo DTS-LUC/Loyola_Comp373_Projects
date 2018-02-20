@@ -30,8 +30,14 @@ public class Maintenance extends Use{
 
   public void removeIssue(Issue fixed) { facilityIssues.remove(fixed);}
 
-  public void removeIssue(String name) {
-    // TODO
+  public void removeIssue(String id) {
+    for (int i = 0;i < facilityIssues.size(); i++) {
+			Issue issue = facilityIssues.get(i);
+			if (issue.getID().equals(id)) {
+				facilityIssues.remove(i);
+				break;
+			}
+    }
   }
 
   public ArrayList<Issue> listIssues() { return this.facilityIssues;}
@@ -50,7 +56,7 @@ public class Maintenance extends Use{
 
   public void addMaintRecord(Request request, String dateCompleted, String workerName){
     request.setComplete();
-    removeIssue(request.getName());
+    removeIssue(request.getID());
     Record record = new Record(request, dateCompleted, workerName);
     maintenanceRecords.add(record);
   }

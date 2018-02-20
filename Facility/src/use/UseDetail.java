@@ -2,7 +2,6 @@ package use;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.Date;
 
 public class UseDetail {
@@ -46,11 +45,11 @@ public class UseDetail {
 		return this.end;
 	}
 
-	public long getDuration() throws ParseException{
+	public double getDuration() throws ParseException{
 		Date dateStart = sdf.parse(this.getStart());
 		Date dateEnd = sdf.parse(this.getEnd());
 		long milliseconds = dateEnd.getTime() - dateStart.getTime();
-		long hours   = ((milliseconds / (1000*60*60)) % 24);
+		double hours   = ((milliseconds / (1000.0*60*60)) % 24);
 		return hours;
 	}
 
