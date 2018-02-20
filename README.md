@@ -1,5 +1,6 @@
-# Project 1: Facility Management System
 ### COMP 373/473 - Objects/Frameworks/Patterns
+
+# Project 1: Facility Management System
 
 **To Run:**
 Import into java IDE such as Eclipse or IntelliJ and build.
