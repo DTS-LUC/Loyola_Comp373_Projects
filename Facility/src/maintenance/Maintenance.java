@@ -30,6 +30,10 @@ public class Maintenance extends Use{
 
   public void removeIssue(Issue fixed) { facilityIssues.remove(fixed);}
 
+  public void removeIssue(String name) {
+    // TODO
+  }
+
   public ArrayList<Issue> listIssues() { return this.facilityIssues;}
 
   public void makeFacilityMaintRequest(String details, long time, long cost){
@@ -46,6 +50,7 @@ public class Maintenance extends Use{
 
   public void addMaintRecord(Request request, String dateCompleted, String workerName){
     request.setComplete();
+    removeIssue(request.getName());
     Record record = new Record(request, dateCompleted, workerName);
     maintenanceRecords.add(record);
   }

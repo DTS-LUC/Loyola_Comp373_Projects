@@ -6,6 +6,7 @@ public class Issue {
     String details;
     long time; // Time in hours, can be decimal
     long cost;
+    long id; //TODO
 
     public Issue(String details, long time, long cost) {
         this.details  = details;
