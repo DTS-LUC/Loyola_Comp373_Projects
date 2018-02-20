@@ -56,12 +56,7 @@ public class FacilityDemo {
 		// listMaintRequest();
 		demo.addRequests(rooms);
 		demo.printRequests(ApartmentComplex);
-		// Schedule maintenance
-		demo.performMaint(rooms);
-		demo.printIssues(ApartmentComplex);
 
-		// listMaintenance();
-		demo.printRecords(ApartmentComplex);
 		// calculate cost
 		System.out.println("$" + ApartmentComplex.totalMaintenanceCost());
 		// Get down Time
@@ -69,5 +64,11 @@ public class FacilityDemo {
 		// calcProblemRate()
 		demo.printProblemRate(ApartmentComplex);
 
+		// Schedule maintenance
+		demo.performMaint(rooms);
+		demo.printIssues(ApartmentComplex);
+
+		// listMaintenance();
+		demo.printRecords(ApartmentComplex);
   }
 }
