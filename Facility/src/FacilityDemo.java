@@ -1,12 +1,20 @@
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import facility.Facility;
 
 public class FacilityDemo {
 
   public static void main (String args[]) throws ParseException {
-	  DemoTools demo = new DemoTools();
+
+	  ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+
+	  DemoTools demo = (DemoTools) context.getBean("demoTools");
+
 	  // Build a large Facility
 		Facility ApartmentComplex = new Facility("Big Complex", "An apartment complex", 200);
 		// Build 3 smaller floor Facilities with rooms
