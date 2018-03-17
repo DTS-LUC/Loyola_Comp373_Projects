@@ -1,6 +1,8 @@
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
+import facility.FacilityImpl;
 import facility.Facility;
 import maintenance.Issue;
 import maintenance.Request;
@@ -10,7 +12,10 @@ class DemoTools{
 
   public void addRooms(Facility floor, int level){
     for (int i = 0; i < 5; i++) {
-      Facility newRoom = new Facility("Room "+level+i, "Room "+i+" on level "+level, 10);
+      Facility newRoom = new FacilityImpl();
+      newRoom.setName("Room "+level+i);
+      newRoom.setInfo("Room "+i+" on level "+level);
+      newRoom.setCapacity(10);
       floor.addNewFacility(newRoom);
     }
   }
@@ -51,13 +56,13 @@ class DemoTools{
       for (UseDetail complexUse : complex.listActualUsage()) {
         System.out.println(complexUse);
       }
-     ArrayList<Facility> floors = complex.listFacilities();
+     List<Facility> floors = complex.getFacility();
      for(int f = 0; f < floors.size(); f++) {
       System.out.println("Reservations for "+ floors.get(f).getName());
        for (UseDetail floorUse : floors.get(f).listActualUsage()) {
          System.out.println(floorUse);
        }
-      ArrayList<Facility> rooms = floors.get(f).listFacilities();
+      List<Facility> rooms = floors.get(f).getFacility();
       for(int r = 0; r < rooms.size(); r++) {
         System.out.println("Reservations for "+ rooms.get(r).getName());
         for (UseDetail roomUse : rooms.get(r).listActualUsage()) {
@@ -72,13 +77,13 @@ class DemoTools{
       for (Inspection complexUse : complex.listInspections()) {
         System.out.println(complexUse);
       }
-     ArrayList<Facility> floors = complex.listFacilities();
+     List<Facility> floors = complex.getFacility();
      for(int f = 0; f < floors.size(); f++) {
       System.out.println("Inspections for "+ floors.get(f).getName());
        for (Inspection floorUse : floors.get(f).listInspections()) {
          System.out.println(floorUse);
        }
-      ArrayList<Facility> rooms = floors.get(f).listFacilities();
+      List<Facility> rooms = floors.get(f).getFacility();
       for(int r = 0; r < rooms.size(); r++) {
         System.out.println("Inspections for "+ rooms.get(r).getName());
         for (Inspection roomUse : rooms.get(r).listInspections()) {
@@ -90,10 +95,10 @@ class DemoTools{
 
   public void printComplex(Facility complex){
     System.out.println(complex);
-    for (Facility floors : complex.listFacilities()) {
+    for (Facility floors : complex.getFacility()) {
        System.out.println(floors);
 
-       for (Facility rooms : floors.listFacilities()) {
+       for (Facility rooms : floors.getFacility()) {
           System.out.println(rooms);
        }
     }
@@ -167,10 +172,10 @@ class DemoTools{
 	public void printIssues(Facility complex){
 		System.out.println(complex.getName());
 		System.out.println(complex.listIssues());
-		for (Facility floors : complex.listFacilities()) {
+		for (Facility floors : complex.getFacility()) {
 			System.out.println(floors.getName());
 		   System.out.println(floors.listIssues());
-		   for (Facility rooms : floors.listFacilities()) {
+		   for (Facility rooms : floors.getFacility()) {
 				 System.out.println(rooms.getName());
 		      System.out.println(rooms.listIssues());
 		   }
@@ -180,10 +185,10 @@ class DemoTools{
 	public void printRequests(Facility complex){
 		System.out.println(complex.getName());
 		System.out.println(complex.listRequests());
-    for (Facility floors : complex.listFacilities()) {
+    for (Facility floors : complex.getFacility()) {
 			System.out.println(floors.getName());
 			 System.out.println(floors.listRequests());
-       for (Facility rooms : floors.listFacilities()) {
+       for (Facility rooms : floors.getFacility()) {
 					System.out.println(rooms.getName());
 					System.out.println(rooms.listRequests());
        }
@@ -193,10 +198,10 @@ class DemoTools{
 	public void printRecords(Facility complex){
 		System.out.println(complex.getName());
 		System.out.println(complex.listRecords());
-    for (Facility floors : complex.listFacilities()) {
+    for (Facility floors : complex.getFacility()) {
 				System.out.println(floors.getName());
        System.out.println(floors.listRecords());
-       for (Facility rooms : floors.listFacilities()) {
+       for (Facility rooms : floors.getFacility()) {
 				 System.out.println(rooms.getName());
           System.out.println(rooms.listRecords());
        }
@@ -206,10 +211,10 @@ class DemoTools{
 	public void printDownTimes(Facility complex){
 		System.out.println(complex.getName());
 		System.out.println(complex.calcDowntime()+ " hrs");
-    for (Facility floors : complex.listFacilities()) {
+    for (Facility floors : complex.getFacility()) {
 				System.out.println(floors.getName());
        System.out.println(floors.calcDowntime()+ " hrs");
-       for (Facility rooms : floors.listFacilities()) {
+       for (Facility rooms : floors.getFacility()) {
 				 System.out.println(rooms.getName());
           System.out.println(rooms.calcDowntime()+ " hrs");
        }
@@ -219,10 +224,10 @@ class DemoTools{
 	public void printProblemRate(Facility complex){
 		System.out.println(complex.getName());
 		System.out.println(complex.calcProblemRate()+ " Issues per use");
-    for (Facility floors : complex.listFacilities()) {
+    for (Facility floors : complex.getFacility()) {
 				System.out.println(floors.getName());
        System.out.println(floors.calcProblemRate()+ " Issues per use");
-       for (Facility rooms : floors.listFacilities()) {
+       for (Facility rooms : floors.getFacility()) {
 				 System.out.println(rooms.getName());
           System.out.println(rooms.calcProblemRate()+ " Issues per use");
        }
@@ -231,9 +236,9 @@ class DemoTools{
 
 	public void printUsageRates(Facility complex) throws ParseException{
 		System.out.println(complex);
-		for (Facility floors : complex.listFacilities()) {
+		for (Facility floors : complex.getFacility()) {
 			 System.out.println(floors);
-			 for (Facility rooms : floors.listFacilities()) {
+			 for (Facility rooms : floors.getFacility()) {
 					System.out.println(rooms);
 					System.out.println(rooms.calcUsageRate() + " hours per use");
 			 }

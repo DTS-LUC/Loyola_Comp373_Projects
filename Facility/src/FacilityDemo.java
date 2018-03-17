@@ -1,11 +1,10 @@
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.BeanFactory;
+import facility.Facility;
+import facility.FacilityImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import facility.Facility;
 
 public class FacilityDemo {
 
@@ -16,67 +15,90 @@ public class FacilityDemo {
 	  DemoTools demo = (DemoTools) context.getBean("demoTools");
 
 	  // Build a large Facility
-		Facility ApartmentComplex = new Facility("Big Complex", "An apartment complex", 200);
+
+	    Facility apartmentComplex = (Facility) context.getBean("facility");
+
+	    apartmentComplex.setName("Big Complex");
+	    apartmentComplex.setInfo("An apartment complex");
+	    apartmentComplex.setCapacity(200);
+
+
 		// Build 3 smaller floor Facilities with rooms
-		Facility floor0 = new Facility("Basement", "Basement of the complex", 50);
+		Facility floor0 = (Facility) context.getBean("facility");
+		floor0.setName("Basement");
+		floor0.setInfo("Basement of the complex");
+		floor0.setCapacity(50);
 		demo.addRooms(floor0, 0);
-		Facility floor1 = new Facility("Floor 1", "First floor of the complex", 50);
-		demo.addRooms(floor1, 1);
-		Facility floor2 = new Facility("Floor 2", "Second floor of the complex", 50);
-		demo.addRooms(floor2, 2);
-		Facility floor3 = new Facility("Floor 3", "Third floor of the complex", 50);
-		demo.addRooms(floor3, 3);
-		// Add floors to large Facility
-		ApartmentComplex.addNewFacility(floor0);
-		ApartmentComplex.addNewFacility(floor1);
-		ApartmentComplex.addNewFacility(floor2);
-		ApartmentComplex.addNewFacility(floor3);
+
+	    Facility floor1 = (Facility) context.getBean("facility");
+	    floor1.setName("Floor 1");
+	    floor1.setInfo("First floor of the complex");
+	    floor1.setCapacity(50);
+	    demo.addRooms(floor1, 1);
+
+	    Facility floor2 = (Facility) context.getBean("facility");
+	    floor2.setName("Floor 2");
+	    floor2.setInfo("Second floor of the complex");
+	    floor2.setCapacity(50);
+	    demo.addRooms(floor2, 2);
+
+	    Facility floor3 = (Facility) context.getBean("facility");
+	    floor3.setName("Floor 3");
+	    floor3.setInfo("Third floor of the complex");
+	    floor3.setCapacity(50);
+	    demo.addRooms(floor3, 3);
+
+		// Add floors to large FacilityImpl
+		apartmentComplex.addNewFacility(floor0);
+		apartmentComplex.addNewFacility(floor1);
+		apartmentComplex.addNewFacility(floor2);
+		apartmentComplex.addNewFacility(floor3);
 		// Print all Facilities
-		demo.printComplex(ApartmentComplex);
+		demo.printComplex(apartmentComplex);
 		// Demo removeFacility
-		ApartmentComplex.removeFacility(floor3);
-		demo.printComplex(ApartmentComplex);
-		ApartmentComplex.addNewFacility(floor3);
+		apartmentComplex.removeFacility(floor3);
+		demo.printComplex(apartmentComplex);
+		apartmentComplex.addNewFacility(floor3);
 
 		//Reserve rooms
 		ArrayList<Facility> rooms = new ArrayList<Facility>();
-		rooms.addAll(floor0.listFacilities());
-		rooms.addAll(floor1.listFacilities());
-		rooms.addAll(floor2.listFacilities());
-		rooms.addAll(floor3.listFacilities());
+		rooms.addAll(floor0.getFacility());
+		rooms.addAll(floor1.getFacility());
+		rooms.addAll(floor2.getFacility());
+		rooms.addAll(floor3.getFacility());
 		demo.makeReservations(rooms);
-		demo.printReservations(ApartmentComplex);
+		demo.printReservations(apartmentComplex);
 		String testStart = demo.reservationFormatter(2018, 1, 5, 11, 00);
 		String testEnd	= demo.reservationFormatter(2018, 1, 5, 12, 30);
 		// Show objectIsInUseDuringInterval()
 		System.out.println(rooms.get(4).objectIsInUseDuringInterval(testStart, testEnd));
 		// Vacate building
-		ApartmentComplex.vacateFacility(testStart, testEnd);
-		demo.printReservations(ApartmentComplex);
+		apartmentComplex.vacateFacility(testStart, testEnd);
+		demo.printReservations(apartmentComplex);
 		// Show UsageRate
-		demo.printUsageRates(ApartmentComplex);
+		demo.printUsageRates(apartmentComplex);
 		// Add inspections
 		demo.makeInspections(rooms);
-		demo.printInspections(ApartmentComplex);
+		demo.printInspections(apartmentComplex);
 		// Make room maintenance requests
 		demo.addIssues(rooms);
-		demo.printIssues(ApartmentComplex);
+		demo.printIssues(apartmentComplex);
 		// listMaintRequest();
 		demo.addRequests(rooms);
-		demo.printRequests(ApartmentComplex);
+		demo.printRequests(apartmentComplex);
 
 		// calculate cost
-		System.out.println("$" + ApartmentComplex.totalMaintenanceCost());
+		System.out.println("$" + apartmentComplex.totalMaintenanceCost());
 		// Get down Time
-		demo.printDownTimes(ApartmentComplex);
+		demo.printDownTimes(apartmentComplex);
 		// calcProblemRate()
-		demo.printProblemRate(ApartmentComplex);
+		demo.printProblemRate(apartmentComplex);
 
 		// Schedule maintenance
 		demo.performMaint(rooms);
-		demo.printIssues(ApartmentComplex);
+		demo.printIssues(apartmentComplex);
 
 		// listMaintenance();
-		demo.printRecords(ApartmentComplex);
+		demo.printRecords(apartmentComplex);
   }
 }
