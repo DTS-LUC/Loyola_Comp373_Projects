@@ -52,20 +52,20 @@ class DemoTools{
 
   public void printReservations(Facility complex){
       System.out.println("Reservations for "+ complex.getName());
-      for (UseDetail complexUse : complex.listActualUsage()) {
+      for (UseDetail complexUse : complex.getUseDetails()) {
           System.out.println(complexUse);
       }
       List<Facility> floors = complex.getFacility();
       for(int f = 0; f < floors.size(); f++) {
           System.out.println("Reservations for "+ floors.get(f).getName());
 
-          for (UseDetail floorUse : floors.get(f).listActualUsage()) {
+          for (UseDetail floorUse : floors.get(f).getUseDetails()) {
               System.out.println(floorUse);
           }
           List<Facility> rooms = floors.get(f).getFacility();
           for(int r = 0; r < rooms.size(); r++) {
               System.out.println("Reservations for "+ rooms.get(r).getName());
-              for (UseDetail roomUse : rooms.get(r).listActualUsage()) {
+              for (UseDetail roomUse : rooms.get(r).getUseDetails()) {
                   System.out.println(roomUse);
               }
           }
@@ -74,19 +74,19 @@ class DemoTools{
 
   public void printInspections(Facility complex){
       System.out.println("Inspections for "+ complex.getName());
-      for (Inspection complexUse : complex.listInspections()) {
+      for (Inspection complexUse : complex.getInspections()) {
           System.out.println(complexUse);
       }
       List<Facility> floors = complex.getFacility();
       for(int f = 0; f < floors.size(); f++) {
           System.out.println("Inspections for "+ floors.get(f).getName());
-          for (Inspection floorUse : floors.get(f).listInspections()) {
+          for (Inspection floorUse : floors.get(f).getInspections()) {
               System.out.println(floorUse);
           }
           List<Facility> rooms = floors.get(f).getFacility();
           for(int r = 0; r < rooms.size(); r++) {
               System.out.println("Inspections for "+ rooms.get(r).getName());
-              for (Inspection roomUse : rooms.get(r).listInspections()) {
+              for (Inspection roomUse : rooms.get(r).getInspections()) {
                   System.out.println(roomUse);
               }
           }

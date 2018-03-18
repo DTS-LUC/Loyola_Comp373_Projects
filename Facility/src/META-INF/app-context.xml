@@ -13,8 +13,6 @@
 
 	<bean id="record" class="maintenance.RecordImpl" scope="prototype" />
 
-	<bean id="useDetail" class="use.UseDetailImpl" scope="prototype" />
-
 	<bean id="inspection" class="use.InspectionImpl" scope="prototype" />
 
 	<bean id="facilityDetail" class="facility.FacilityDetailImpl" scope="prototype" />
@@ -50,5 +48,6 @@
 
 	<bean id="demoTools" class="DemoTools" scope="prototype" />
 
+	<bean id="useDetail" class="use.UseDetailImpl" scope="prototype" />
 
 </beans>

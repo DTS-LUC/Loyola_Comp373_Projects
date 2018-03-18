@@ -70,7 +70,7 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
     public double calcProblemRate(){
       // Problem rate = Issues per use
       double issues = this.listIssues().size();
-      double uses   = this.listActualUsage().size();
+      double uses   = this.getUseDetails().size();
       double rate = issues/uses;
 
       return rate;

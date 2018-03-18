@@ -21,6 +21,9 @@ public class UseImpl extends FacilityDetailImpl implements Use {
 	public List<UseDetail> getUseDetails() { return usageHistory; }
 
 
+	public List<Inspection> getInspections() { return inspections; }
+	public void setInspections(List<Inspection> inspections) {this.inspections=inspections;}
+
 	public boolean objectIsInUseDuringInterval(String start, String end) throws ParseException{
 		Date checkStart = sdf.parse(start);
 		Date checkEnd   = sdf.parse(end);
@@ -67,17 +70,13 @@ public class UseImpl extends FacilityDetailImpl implements Use {
 
 	public void performInspection(Inspection inspect){ this.inspections.add(inspect); }
 
-	public List<Inspection> listInspections(){ return this.inspections; }
-
-	public List<UseDetail> listActualUsage(){ return this.usageHistory; }
-
 	public double calcUsageRate() throws ParseException{
 		long useTime = 0;
-		for (UseDetail use : this.listActualUsage()) {
+		for (UseDetail use : this.getUseDetails()) {
 			useTime += use.getDuration();
 		}
 
-		double usePerRes = useTime / (double) (this.listActualUsage().size());
+		double usePerRes = useTime / (double) (this.getUseDetails().size());
 		return usePerRes;
 	}
 }
