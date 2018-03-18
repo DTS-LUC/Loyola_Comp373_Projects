@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Date;
 import facility.FacilityDetailImpl;
 
-public class UseImpl extends FacilityDetailImpl implements Use {
+public class UseImpl implements Use {
 
 	private List<UseDetail> usageHistory;
 	private List<Inspection> inspections;

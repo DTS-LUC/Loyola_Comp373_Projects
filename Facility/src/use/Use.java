@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public interface Use extends FacilityDetail {
+public interface Use{
     public void setSimpleDateFormat(SimpleDateFormat sdf);
     public SimpleDateFormat getSimpleDateFormat();
     public void setUseDetails(List<UseDetail> useDetails);

@@ -10,7 +10,7 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
     private List<Issue> facilityIssues;
     private List<Request> maintenanceRequests;
     private List<Record> maintenanceRecords;
-
+		
     public MaintenanceImpl() { }
 
     public void addIssue(Issue issue) { facilityIssues.add(issue); }
@@ -76,6 +76,8 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
     public double calcProblemRate(){
       // Problem rate = Issues per use
       double issues = this.getIssues().size();
+		// NOTE Issue here, will need to access number of uses another way
+			// - Can definetly just have that sent in the function parameters
       double uses   = this.getUseDetails().size();
       double rate = issues/uses;
 

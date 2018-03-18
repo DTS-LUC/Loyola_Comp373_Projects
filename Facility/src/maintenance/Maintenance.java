@@ -4,7 +4,7 @@ import use.Use;
 
 import java.util.List;
 
-public interface Maintenance extends Use {
+public interface Maintenance{
     public void addIssue(Issue issue);
     public void removeIssue(Issue fixed);
     public void removeIssue(String id);
