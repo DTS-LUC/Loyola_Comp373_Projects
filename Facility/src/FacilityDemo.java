@@ -81,7 +81,7 @@ public class FacilityDemo {
 		// Show UsageRate
 	  demo.printUsageRates(apartmentComplex);
 		// Add inspections
-	  demo.makeInspections(rooms);
+	  demo.makeInspections(rooms, context);
 	  demo.printInspections(apartmentComplex);
 		// Make room maintenance requests
 	  demo.addIssues(rooms, context);

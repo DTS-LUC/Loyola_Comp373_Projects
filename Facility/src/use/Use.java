@@ -10,7 +10,7 @@ public interface Use extends FacilityDetail {
     public void assignFacilityToUse(UseDetail reservation) throws ParseException;
     public boolean objectIsInUseDuringInterval(String start, String end) throws ParseException;
     public void removeObjectsDuringInterval(String start, String end) throws ParseException;
-    public void performInspection(String start, String end, String inspector, String info);
+    public void performInspection(Inspection inspect);
     public List<Inspection> listInspections();
     public List<UseDetail> listActualUsage();
     public double calcUsageRate() throws ParseException;

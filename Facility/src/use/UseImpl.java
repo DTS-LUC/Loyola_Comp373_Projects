@@ -65,15 +65,7 @@ public class UseImpl extends FacilityDetailImpl implements Use {
 		}
 	}
 
-	//TODO: take in Inspection as argument, don't create one
-	public void performInspection(String start, String end, String inspector, String info){
-		Inspection inspect = new InspectionImpl();
-		inspect.setStart(start);
-		inspect.setEnd(end);
-		inspect.setInspector(inspector);
-		inspect.setInfo(info);
-		this.inspections.add(inspect);
-	}
+	public void performInspection(Inspection inspect){ this.inspections.add(inspect); }
 
 	public List<Inspection> listInspections(){ return this.inspections; }
 

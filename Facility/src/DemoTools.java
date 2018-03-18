@@ -145,7 +145,7 @@ class DemoTools{
       }
   }
 
-  public void makeInspections(List<Facility> rooms){
+  public void makeInspections(List<Facility> rooms, ApplicationContext context){
       String inspection1Start = reservationFormatter(2018, 1, 6, 11, 00);
       String inspection1End	= reservationFormatter(2018, 1, 6, 12, 00);
       String inspection2Start = reservationFormatter(2018, 1, 7, 11, 00);
@@ -153,9 +153,26 @@ class DemoTools{
       String inspection3Start = reservationFormatter(2018, 8, 6, 11, 00);
       String inspection3End	= reservationFormatter(2018, 8, 6, 12, 00);
 
-      rooms.get(2).performInspection(inspection1Start, inspection1End, "Mr. Jones", "Example inspection");
-      rooms.get(2).performInspection(inspection2Start, inspection2End, "Mr. Smith", "Example inspection");
-      rooms.get(2).performInspection(inspection3Start, inspection3End, "Mr. James", "Example inspection");
+      Inspection inspection1 = (Inspection) context.getBean("inspection");
+      inspection1.setStart(inspection1Start);
+      inspection1.setEnd(inspection1End);
+      inspection1.setInspector("Mr. Jones");
+      inspection1.setInfo("Example inspection");
+      rooms.get(2).performInspection(inspection1);
+
+      Inspection inspection2 = (Inspection) context.getBean("inspection");
+      inspection2.setStart(inspection2Start);
+      inspection2.setEnd(inspection2End);
+      inspection2.setInspector("Mr. Smith");
+      inspection2.setInfo("Example inspection");
+      rooms.get(2).performInspection(inspection2);
+
+      Inspection inspection3 = (Inspection) context.getBean("inspection");
+      inspection3.setStart(inspection3Start);
+      inspection3.setEnd(inspection3End);
+      inspection3.setInspector("Mr. James");
+      inspection3.setInfo("Example inspection");
+      rooms.get(2).performInspection(inspection3);
 
   }
 
