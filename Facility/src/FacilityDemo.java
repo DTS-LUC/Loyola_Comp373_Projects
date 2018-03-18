@@ -60,17 +60,15 @@ public class FacilityDemo {
 	  apartmentComplex.addNewFacility(floor3);
 
 		//Reserve rooms
-	  ArrayList<Facility> rooms = new ArrayList<Facility>();
-	  rooms.addAll(floor0.getFacility());
-	  rooms.addAll(floor1.getFacility());
-	  rooms.addAll(floor2.getFacility());
-	  rooms.addAll(floor3.getFacility());
-	  demo.makeReservations(rooms, context);
+	  demo.makeReservations(floor0.getFacility(), context);
+	  demo.makeReservations(floor1.getFacility(), context);
+	  demo.makeReservations(floor2.getFacility(), context);
+	  demo.makeReservations(floor3.getFacility(), context);
 	  demo.printReservations(apartmentComplex);
 	  String testStart = demo.reservationFormatter(2018, 1, 5, 11, 00);
 	  String testEnd	= demo.reservationFormatter(2018, 1, 5, 12, 30);
 		// Show objectIsInUseDuringInterval()
-	  System.out.println(rooms.get(4).objectIsInUseDuringInterval(testStart, testEnd));
+	  System.out.println(floor3.objectIsInUseDuringInterval(testStart, testEnd));
 		// Vacate building
 
 	  UseDetail vacateComplex = (UseDetail) context.getBean("useDetail");
@@ -81,13 +79,13 @@ public class FacilityDemo {
 		// Show UsageRate
 	  demo.printUsageRates(apartmentComplex);
 		// Add inspections
-	  demo.makeInspections(rooms, context);
+	  demo.makeInspections(apartmentComplex.getFacility(), context);
 	  demo.printInspections(apartmentComplex);
 		// Make room maintenance requests
-	  demo.addIssues(rooms, context);
+	  demo.addIssues(apartmentComplex.getFacility(), context);
 	  demo.printIssues(apartmentComplex);
 		// listMaintRequest();
-	  demo.addRequests(rooms);
+	  demo.addRequests(apartmentComplex.getFacility());
 	  demo.printRequests(apartmentComplex);
 
 		// calculate cost
@@ -98,7 +96,7 @@ public class FacilityDemo {
 	  demo.printProblemRate(apartmentComplex);
 
 		// Schedule maintenance
-	  demo.performMaint(rooms);
+	  demo.performMaint(apartmentComplex.getFacility());
 	  demo.printIssues(apartmentComplex);
 
 		// listMaintenance();
