@@ -9,15 +9,31 @@
 
 	<bean id="issue" class="maintenance.IssueImpl" scope="prototype" />
 
-	<bean id="request" class="maintenance.RequestImpl" scope="prototype" />
+	<!-- with help from: https://stackoverflow.com/questions/23449908/spring-java-util-date-bean -->
+	<bean id="simpleDateFormat" class="java.text.SimpleDateFormat" scope="singleton">
+		<constructor-arg value="yyyy-MM-dd'T'HH:mm:ss.SSSZ"/>
+	</bean>
 
-	<bean id="record" class="maintenance.RecordImpl" scope="prototype" />
+	<bean id="request" class="maintenance.RequestImpl" scope="prototype">
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
+	</bean>
 
-	<bean id="inspection" class="use.InspectionImpl" scope="prototype" />
+	<bean id="record" class="maintenance.RecordImpl" scope="prototype">
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
+	</bean>
 
-	<bean id="facilityDetail" class="facility.FacilityDetailImpl" scope="prototype" />
+	<bean id="inspection" class="use.InspectionImpl" scope="prototype">
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
+	</bean>
+
+	<bean id="facilityDetail" class="facility.FacilityDetailImpl" scope="prototype">
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
+	</bean>
+
+	<bean id="date" class="java.util.Date" scope="singleton"/>
 
 	<bean id="use" class="use.UseImpl" scope="prototype">
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
 		<property name="useDetails">
 			<list>
 				<ref bean="useDetail"/>
@@ -38,16 +54,20 @@
 		<property name="records">
 			<list/>
 		</property>
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
 	</bean>
 
 	<bean id="facility" class="facility.FacilityImpl" scope="prototype">
 		<property name="facility">
 			<list/>
 		</property>
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
 	</bean>
 
 	<bean id="demoTools" class="DemoTools" scope="prototype" />
 
-	<bean id="useDetail" class="use.UseDetailImpl" scope="prototype" />
+	<bean id="useDetail" class="use.UseDetailImpl" scope="prototype">
+		<property name="simpleDateFormat" ref="simpleDateFormat"/>
+	</bean>
 
 </beans>

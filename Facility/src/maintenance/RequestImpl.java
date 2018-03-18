@@ -8,14 +8,14 @@ public class RequestImpl extends IssueImpl implements Request{
     //default access is package private so that subclasses may use them directly
     private String  dateCreated;
     private boolean complete;
-    private final SimpleDateFormat 	sdf;
+    private SimpleDateFormat 	sdf;
 
 
-    public RequestImpl() {
-        this.sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-        Date created = new Date();
-        this.dateCreated = sdf.format(created); //use current date when created
-    }
+    public RequestImpl() { }
+
+    public void setSimpleDateFormat(SimpleDateFormat sdf) {this.sdf = sdf;}
+
+    public SimpleDateFormat getSimpleDateFormat() { return sdf; }
 
     public void setIssue(Issue issue) {
         details = issue.getDetails();

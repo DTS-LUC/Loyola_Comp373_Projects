@@ -10,12 +10,14 @@ public class UseImpl extends FacilityDetailImpl implements Use {
 
 	private List<UseDetail> usageHistory;
 	private List<Inspection> inspections;
-	private final SimpleDateFormat sdf;
+	private SimpleDateFormat sdf;
 
 
-	public UseImpl() {
-		this.sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-	}
+	public UseImpl() {}
+
+	public void setSimpleDateFormat(SimpleDateFormat sdf) {this.sdf = sdf;}
+
+	public SimpleDateFormat getSimpleDateFormat() { return sdf; }
 
 	public void setUseDetails(List<UseDetail> useDetails) { usageHistory = useDetails; }
 	public List<UseDetail> getUseDetails() { return usageHistory; }

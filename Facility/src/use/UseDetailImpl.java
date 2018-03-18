@@ -11,11 +11,13 @@ public class UseDetailImpl implements UseDetail {
 	private String name;
 	private String info;
 
-	private final SimpleDateFormat 	sdf;
+	private SimpleDateFormat sdf;
 
-	public UseDetailImpl() {
-		this.sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-	}
+	public UseDetailImpl() { }
+
+	public void setSimpleDateFormat(SimpleDateFormat sdf) {this.sdf = sdf;}
+
+	public SimpleDateFormat getSimpleDateFormat() { return sdf; }
 
 	public String toString(){
 		return ("Reservation: [Name: " + this.name
