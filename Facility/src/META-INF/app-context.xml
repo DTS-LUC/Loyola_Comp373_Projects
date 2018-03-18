@@ -7,11 +7,40 @@
 
 	<description>Wiring the dependencies for the Facility Application.</description>
 
-	<bean id="use" class="use.UseImpl" scope="prototype"></bean>
+	<bean id="issue" class="maintenance.IssueImpl" scope="prototype" />
 
-	<bean id="facilityDetail" class="facility.FacilityDetailImpl" scope="prototype"></bean>
+	<bean id="request" class="maintenance.RequestImpl" scope="prototype" />
 
-	<bean id="maintenance" class="maintenance.MaintenanceImpl" scope="prototype"></bean>
+	<bean id="record" class="maintenance.RecordImpl" scope="prototype" />
+
+	<bean id="useDetail" class="use.UseDetailImpl" scope="prototype" />
+
+	<bean id="inspection" class="use.InspectionImpl" scope="prototype" />
+
+	<bean id="facilityDetail" class="facility.FacilityDetailImpl" scope="prototype" />
+
+	<bean id="use" class="use.UseImpl" scope="prototype">
+		<property name="useDetails">
+			<list>
+				<ref bean="useDetail"/>
+			</list>
+		</property>
+		<property name="inspections">
+			<list/>
+		</property>
+	</bean>
+
+	<bean id="maintenance" class="maintenance.MaintenanceImpl" scope="prototype">
+		<property name="issues">
+			<list/>
+		</property>
+		<property name="requests">
+			<list/>
+		</property>
+		<property name="records">
+			<list/>
+		</property>
+	</bean>
 
 	<bean id="facility" class="facility.FacilityImpl" scope="prototype">
 		<property name="facility">
@@ -19,7 +48,7 @@
 		</property>
 	</bean>
 
-	<bean id="demoTools" class="DemoTools" scope="prototype"></bean>
+	<bean id="demoTools" class="DemoTools" scope="prototype" />
 
 
 </beans>

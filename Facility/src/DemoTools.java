@@ -1,18 +1,20 @@
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
-import facility.FacilityImpl;
 import facility.Facility;
 import maintenance.Issue;
 import maintenance.Request;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import use.Inspection;
 import use.UseDetail;
 class DemoTools{
 
+  ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+
   public void addRooms(Facility floor, int level){
     for (int i = 0; i < 5; i++) {
-      Facility newRoom = new FacilityImpl();
+      Facility newRoom = (Facility) context.getBean("facility");;
       newRoom.setName("Room "+level+i);
       newRoom.setInfo("Room "+i+" on level "+level);
       newRoom.setCapacity(10);
@@ -52,94 +54,115 @@ class DemoTools{
   }
 
   public void printReservations(Facility complex){
-    System.out.println("Reservations for "+ complex.getName());
+      System.out.println("Reservations for "+ complex.getName());
       for (UseDetail complexUse : complex.listActualUsage()) {
-        System.out.println(complexUse);
+          System.out.println(complexUse);
       }
-     List<Facility> floors = complex.getFacility();
-     for(int f = 0; f < floors.size(); f++) {
-      System.out.println("Reservations for "+ floors.get(f).getName());
-       for (UseDetail floorUse : floors.get(f).listActualUsage()) {
-         System.out.println(floorUse);
-       }
-      List<Facility> rooms = floors.get(f).getFacility();
-      for(int r = 0; r < rooms.size(); r++) {
-        System.out.println("Reservations for "+ rooms.get(r).getName());
-        for (UseDetail roomUse : rooms.get(r).listActualUsage()) {
-          System.out.println(roomUse);
-        }
+      List<Facility> floors = complex.getFacility();
+      for(int f = 0; f < floors.size(); f++) {
+          System.out.println("Reservations for "+ floors.get(f).getName());
+
+          for (UseDetail floorUse : floors.get(f).listActualUsage()) {
+              System.out.println(floorUse);
+          }
+          List<Facility> rooms = floors.get(f).getFacility();
+          for(int r = 0; r < rooms.size(); r++) {
+              System.out.println("Reservations for "+ rooms.get(r).getName());
+              for (UseDetail roomUse : rooms.get(r).listActualUsage()) {
+                  System.out.println(roomUse);
+              }
+          }
       }
-     }
-    }
+  }
 
   public void printInspections(Facility complex){
-    System.out.println("Inspections for "+ complex.getName());
+      System.out.println("Inspections for "+ complex.getName());
       for (Inspection complexUse : complex.listInspections()) {
-        System.out.println(complexUse);
+          System.out.println(complexUse);
       }
-     List<Facility> floors = complex.getFacility();
-     for(int f = 0; f < floors.size(); f++) {
-      System.out.println("Inspections for "+ floors.get(f).getName());
-       for (Inspection floorUse : floors.get(f).listInspections()) {
-         System.out.println(floorUse);
-       }
-      List<Facility> rooms = floors.get(f).getFacility();
-      for(int r = 0; r < rooms.size(); r++) {
-        System.out.println("Inspections for "+ rooms.get(r).getName());
-        for (Inspection roomUse : rooms.get(r).listInspections()) {
-          System.out.println(roomUse);
-        }
+      List<Facility> floors = complex.getFacility();
+      for(int f = 0; f < floors.size(); f++) {
+          System.out.println("Inspections for "+ floors.get(f).getName());
+          for (Inspection floorUse : floors.get(f).listInspections()) {
+              System.out.println(floorUse);
+          }
+          List<Facility> rooms = floors.get(f).getFacility();
+          for(int r = 0; r < rooms.size(); r++) {
+              System.out.println("Inspections for "+ rooms.get(r).getName());
+              for (Inspection roomUse : rooms.get(r).listInspections()) {
+                  System.out.println(roomUse);
+              }
+          }
       }
-     }
-    }
+  }
 
   public void printComplex(Facility complex){
-    System.out.println(complex);
-    for (Facility floors : complex.getFacility()) {
-       System.out.println(floors);
+      System.out.println(complex);
+      for (Facility floors : complex.getFacility()) {
+          System.out.println(floors);
 
-       for (Facility rooms : floors.getFacility()) {
-          System.out.println(rooms);
-       }
-    }
+          for (Facility rooms : floors.getFacility()) {
+              System.out.println(rooms);
+          }
+      }
   }
 
-  public void makeReservations(ArrayList<Facility> rooms) throws ParseException{
-    for (int q = 0; q < rooms.size(); q++) {
-			Facility tempRoom = rooms.get(q);
-			String start0 	= reservationFormatter(2018, 1, 5, 8, 15);
-			String end0 		= reservationFormatter(2018, 1, 5, 10, 15);
-			tempRoom.assignFacilityToUse(start0, end0, "Reservation 1", "Example reservation");
+  public void makeReservations(List<Facility> rooms) throws ParseException{
+      for (int q = 0; q < rooms.size(); q++) {
+          Facility tempRoom = rooms.get(q);
+          String start0 	= reservationFormatter(2018, 1, 5, 8, 15);
+          String end0 		= reservationFormatter(2018, 1, 5, 10, 15);
+          UseDetail useDetail0 = (UseDetail) context.getBean("useDetail");
+          useDetail0.setStart(start0);
+          useDetail0.setEnd(end0);
+          useDetail0.setName("Reservation 1");
+          useDetail0.setInfo("Example reservation");
+          tempRoom.assignFacilityToUse(useDetail0);
 
-			String start1 	= reservationFormatter(2018, 1, 5, 11, 15);
-			String end1	= reservationFormatter(2018, 1, 5, 12, 15);
-			tempRoom.assignFacilityToUse(start1, end1, "Reservation 2", "Example reservation");
+          String start1 	= reservationFormatter(2018, 1, 5, 11, 15);
+          String end1	= reservationFormatter(2018, 1, 5, 12, 15);
+          UseDetail useDetail1 = (UseDetail) context.getBean("useDetail");
+          useDetail1.setStart(start1);
+          useDetail1.setEnd(end1);
+          useDetail1.setName("Reservation 2");
+          useDetail1.setInfo("Example reservation");
+          tempRoom.assignFacilityToUse(useDetail1);
 
-			String start2 	= reservationFormatter(2018, 1, 4, 8, 15);
-			String end2 		= reservationFormatter(2018, 1, 4, 10, 15);
-			tempRoom.assignFacilityToUse(start2, end2, "Reservation 3", "Example reservation");
+          String start2 	= reservationFormatter(2018, 1, 4, 8, 15);
+          String end2 		= reservationFormatter(2018, 1, 4, 10, 15);
+          UseDetail useDetail2 = (UseDetail) context.getBean("useDetail");
+          useDetail2.setStart(start2);
+          useDetail2.setEnd(end2);
+          useDetail2.setName("Reservation 3");
+          useDetail2.setInfo("Example reservation");
+          tempRoom.assignFacilityToUse(useDetail2);
 
-			String start3 	= reservationFormatter(2018, 1, 4, 11, 15);
-			String end3	= reservationFormatter(2018, 1, 4, 12, 15);
-			tempRoom.assignFacilityToUse(start3, end3, "Reservation 4", "Example reservation");
-		}
+          String start3 	= reservationFormatter(2018, 1, 4, 11, 15);
+          String end3	= reservationFormatter(2018, 1, 4, 12, 15);
+          UseDetail useDetail3 = (UseDetail) context.getBean("useDetail");
+          useDetail3.setStart(start3);
+          useDetail3.setEnd(end3);
+          useDetail3.setName("Reservation 4");
+          useDetail3.setInfo("Example reservation");
+          tempRoom.assignFacilityToUse(useDetail3);
+      }
   }
 
-  public void makeInspections(ArrayList<Facility> rooms){
-    String inspection1Start = reservationFormatter(2018, 1, 6, 11, 00);
-		String inspection1End	= reservationFormatter(2018, 1, 6, 12, 00);
-		String inspection2Start = reservationFormatter(2018, 1, 7, 11, 00);
-		String inspection2End	= reservationFormatter(2018, 1, 7, 12, 00);
-		String inspection3Start = reservationFormatter(2018, 8, 6, 11, 00);
-		String inspection3End	= reservationFormatter(2018, 8, 6, 12, 00);
+  public void makeInspections(List<Facility> rooms){
+      String inspection1Start = reservationFormatter(2018, 1, 6, 11, 00);
+      String inspection1End	= reservationFormatter(2018, 1, 6, 12, 00);
+      String inspection2Start = reservationFormatter(2018, 1, 7, 11, 00);
+      String inspection2End	= reservationFormatter(2018, 1, 7, 12, 00);
+      String inspection3Start = reservationFormatter(2018, 8, 6, 11, 00);
+      String inspection3End	= reservationFormatter(2018, 8, 6, 12, 00);
 
-		rooms.get(2).performInspection(inspection1Start, inspection1End, "Mr. Jones", "Example inspection");
-		rooms.get(2).performInspection(inspection2Start, inspection2End, "Mr. Smith", "Example inspection");
-		rooms.get(2).performInspection(inspection3Start, inspection3End, "Mr. James", "Example inspection");
+      rooms.get(2).performInspection(inspection1Start, inspection1End, "Mr. Jones", "Example inspection");
+      rooms.get(2).performInspection(inspection2Start, inspection2End, "Mr. Smith", "Example inspection");
+      rooms.get(2).performInspection(inspection3Start, inspection3End, "Mr. James", "Example inspection");
 
   }
 
-  public void addIssues(ArrayList<Facility> rooms){
+  public void addIssues(List<Facility> rooms){
     for (int q = 0; q < rooms.size(); q++) {
       Facility tempRoom = rooms.get(q);
       String details = "Issue number " + q;
@@ -149,7 +172,7 @@ class DemoTools{
     }
   }
 
-  public void addRequests(ArrayList<Facility> rooms){
+  public void addRequests(List<Facility> rooms){
     for (int q = 0; q < rooms.size(); q++) {
       Facility tempRoom = rooms.get(q);
       for (Issue issue : tempRoom.listIssues()) {
@@ -158,7 +181,7 @@ class DemoTools{
     }
   }
 
-  public void performMaint(ArrayList<Facility> rooms){
+  public void performMaint(List<Facility> rooms){
     for (int q = 0; q < rooms.size(); q++) {
       Facility tempRoom = rooms.get(q);
       for (Request request : tempRoom.listRequests()) {
@@ -169,79 +192,80 @@ class DemoTools{
     }
   }
 
-	public void printIssues(Facility complex){
-		System.out.println(complex.getName());
-		System.out.println(complex.listIssues());
-		for (Facility floors : complex.getFacility()) {
-			System.out.println(floors.getName());
-		   System.out.println(floors.listIssues());
-		   for (Facility rooms : floors.getFacility()) {
-				 System.out.println(rooms.getName());
-		      System.out.println(rooms.listIssues());
-		   }
-		  }
-	}
+  public void printIssues(Facility complex){
+      System.out.println(complex.getName());
+      System.out.println(complex.listIssues());
+      for (Facility floors : complex.getFacility()) {
+          System.out.println(floors.getName());
+          System.out.println(floors.listIssues());
+          for (Facility rooms : floors.getFacility()) {
+              System.out.println(rooms.getName());
+              System.out.println(rooms.listIssues());
+          }
+      }
+  }
 
-	public void printRequests(Facility complex){
-		System.out.println(complex.getName());
-		System.out.println(complex.listRequests());
-    for (Facility floors : complex.getFacility()) {
-			System.out.println(floors.getName());
-			 System.out.println(floors.listRequests());
-       for (Facility rooms : floors.getFacility()) {
-					System.out.println(rooms.getName());
-					System.out.println(rooms.listRequests());
-       }
-    }
-	}
+  public void printRequests(Facility complex){
+      System.out.println(complex.getName());
+      System.out.println(complex.listRequests());
+      for (Facility floors : complex.getFacility()) {
+          System.out.println(floors.getName());
+          System.out.println(floors.listRequests());
 
-	public void printRecords(Facility complex){
-		System.out.println(complex.getName());
-		System.out.println(complex.listRecords());
-    for (Facility floors : complex.getFacility()) {
-				System.out.println(floors.getName());
-       System.out.println(floors.listRecords());
-       for (Facility rooms : floors.getFacility()) {
-				 System.out.println(rooms.getName());
-          System.out.println(rooms.listRecords());
-       }
-    }
-	}
+          for (Facility rooms : floors.getFacility()) {
+              System.out.println(rooms.getName());
+              System.out.println(rooms.listRequests());
+          }
+      }
+  }
 
-	public void printDownTimes(Facility complex){
-		System.out.println(complex.getName());
-		System.out.println(complex.calcDowntime()+ " hrs");
-    for (Facility floors : complex.getFacility()) {
-				System.out.println(floors.getName());
-       System.out.println(floors.calcDowntime()+ " hrs");
-       for (Facility rooms : floors.getFacility()) {
-				 System.out.println(rooms.getName());
-          System.out.println(rooms.calcDowntime()+ " hrs");
-       }
-    }
-	}
+  public void printRecords(Facility complex){
+      System.out.println(complex.getName());
+      System.out.println(complex.listRecords());
+      for (Facility floors : complex.getFacility()) {
+          System.out.println(floors.getName());
+          System.out.println(floors.listRecords());
+          for (Facility rooms : floors.getFacility()) {
+              System.out.println(rooms.getName());
+              System.out.println(rooms.listRecords());
+          }
+      }
+  }
 
-	public void printProblemRate(Facility complex){
-		System.out.println(complex.getName());
-		System.out.println(complex.calcProblemRate()+ " Issues per use");
-    for (Facility floors : complex.getFacility()) {
-				System.out.println(floors.getName());
-       System.out.println(floors.calcProblemRate()+ " Issues per use");
-       for (Facility rooms : floors.getFacility()) {
-				 System.out.println(rooms.getName());
-          System.out.println(rooms.calcProblemRate()+ " Issues per use");
-       }
-    }
-	}
+  public void printDownTimes(Facility complex){
+      System.out.println(complex.getName());
+      System.out.println(complex.calcDowntime()+ " hrs");
+      for (Facility floors : complex.getFacility()) {
+          System.out.println(floors.getName());
+          System.out.println(floors.calcDowntime()+ " hrs");
+          for (Facility rooms : floors.getFacility()) {
+              System.out.println(rooms.getName());
+              System.out.println(rooms.calcDowntime()+ " hrs");
+          }
+      }
+  }
 
-	public void printUsageRates(Facility complex) throws ParseException{
-		System.out.println(complex);
-		for (Facility floors : complex.getFacility()) {
-			 System.out.println(floors);
-			 for (Facility rooms : floors.getFacility()) {
-					System.out.println(rooms);
-					System.out.println(rooms.calcUsageRate() + " hours per use");
-			 }
-		}
-	}
+  public void printProblemRate(Facility complex){
+      System.out.println(complex.getName());
+      System.out.println(complex.calcProblemRate()+ " Issues per use");
+      for (Facility floors : complex.getFacility()) {
+          System.out.println(floors.getName());
+          System.out.println(floors.calcProblemRate()+ " Issues per use");
+          for (Facility rooms : floors.getFacility()) {
+              System.out.println(rooms.getName());
+              System.out.println(rooms.calcProblemRate()+ " Issues per use");
+          }
+      }
+  }
+
+  public void printUsageRates(Facility complex) throws ParseException{
+      System.out.println(complex);
+      for (Facility floors : complex.getFacility()) {
+          System.out.println(floors);
+          for (Facility rooms : floors.getFacility()) {
+              System.out.println(rooms);
+              System.out.println(rooms.calcUsageRate() + " hours per use");
+          }
+      }
+  }
 }

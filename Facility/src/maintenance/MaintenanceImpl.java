@@ -1,5 +1,6 @@
 package maintenance;
 
+import use.Use;
 import use.UseImpl;
 
 import java.util.ArrayList;
@@ -19,8 +20,12 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
       this.maintenanceRecords  = new ArrayList<Record>();
     }
 
+  //TODO: take in issue as argument, don't create one
   public void addIssue(String details, long time, long cost){
-    Issue issue = new Issue(details, time, cost);
+    Issue issue = new IssueImpl();
+    issue.setDetails(details);
+    issue.setTime(time);
+    issue.setCost(cost);
     facilityIssues.add(issue);
   }
 
@@ -40,22 +45,32 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
 
   public List<Issue> listIssues() { return this.facilityIssues;}
 
+  //TODO: take in request as argument, don't create one
   public void makeFacilityMaintRequest(String details, long time, long cost){
-    Request request = new Request(details, time, cost);
+    Request request = new RequestImpl();
+    request.setDetails(details);
+    request.setTime(time);
+    request.setCost(cost);
     maintenanceRequests.add(request);
   }
 
+  //TODO: take in request as argument, don't create one
   public void makeFacilityMaintRequest(Issue issue){
-    Request request = new Request(issue);
+    Request request = new RequestImpl();
+    request.setIssue(issue);
     maintenanceRequests.add(request);
   }
 
   public List<Request> listRequests() {return this.maintenanceRequests;}
 
+  //TODO: take in record as argument, don't create one
   public void addMaintRecord(Request request, String dateCompleted, String workerName){
     request.setComplete();
     removeIssue(request.getID());
-    Record record = new Record(request, dateCompleted, workerName);
+    Record record = new RecordImpl();
+    record.setRequest(request);
+    record.setDateCompleted(dateCompleted);
+    record.setWorkerName(workerName);
     maintenanceRecords.add(record);
   }
 
