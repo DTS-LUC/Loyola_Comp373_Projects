@@ -8,12 +8,15 @@ public interface Maintenance extends Use {
     public void addIssue(Issue issue);
     public void removeIssue(Issue fixed);
     public void removeIssue(String id);
-    public List<Issue> listIssues();
+    public List<Issue> getIssues();
+    public void setIssues(List<Issue> issues);
     public void makeFacilityMaintRequest(Request request);
     public void makeFacilityMaintRequest(Issue issue);
-    public List<Request> listRequests();
+    public List<Request> getRequests();
+    public void setRequests(List<Request> requests);
     public void addMaintRecord(Request request, String dateCompleted, String workerName);
-    public List<Record> listRecords();
+    public List<Record> getRecords();
+    public void setRecords(List<Record> records);
     public long calcMaintenanceCost();
     public long calcDowntime();
     public double calcProblemRate();

@@ -27,7 +27,9 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
       }
     }
 
-    public List<Issue> listIssues() { return this.facilityIssues;}
+    public List<Issue> getIssues() { return this.facilityIssues;}
+
+    public void setIssues(List<Issue> issues) {this.facilityIssues = issues;}
 
     public void makeFacilityMaintRequest(Request request){ maintenanceRequests.add(request); }
 
@@ -37,7 +39,9 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
       maintenanceRequests.add(request);
     }
 
-    public List<Request> listRequests() {return this.maintenanceRequests;}
+    public List<Request> getRequests() {return this.maintenanceRequests;}
+
+    public void setRequests(List<Request> requests) {this.maintenanceRequests = requests;}
 
     public void addMaintRecord(Request request, String dateCompleted, String workerName){
       request.setComplete();
@@ -49,11 +53,13 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
       maintenanceRecords.add(record);
     }
 
-    public List<Record> listRecords() {return this.maintenanceRecords;}
+    public List<Record> getRecords() {return this.maintenanceRecords;}
+
+    public void setRecords(List<Record> records) {this.maintenanceRecords = records;}
 
     public long calcMaintenanceCost() {
       long cost = 0;
-      for (Issue i: this.listIssues()) {
+      for (Issue i: this.getIssues()) {
         cost += i.getCost();
       }
       return cost;
@@ -61,7 +67,7 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
 
     public long calcDowntime() {
       long time = 0;
-      for (Issue i: this.listIssues()) {
+      for (Issue i: this.getIssues()) {
         time += i.getTime();
       }
       return time;
@@ -69,7 +75,7 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
 
     public double calcProblemRate(){
       // Problem rate = Issues per use
-      double issues = this.listIssues().size();
+      double issues = this.getIssues().size();
       double uses   = this.getUseDetails().size();
       double rate = issues/uses;
 

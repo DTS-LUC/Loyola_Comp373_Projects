@@ -195,7 +195,7 @@ class DemoTools{
   public void addRequests(List<Facility> rooms){
     for (int q = 0; q < rooms.size(); q++) {
       Facility tempRoom = rooms.get(q);
-      for (Issue issue : tempRoom.listIssues()) {
+      for (Issue issue : tempRoom.getIssues()) {
         tempRoom.makeFacilityMaintRequest(issue);
       }
     }
@@ -204,7 +204,7 @@ class DemoTools{
   public void performMaint(List<Facility> rooms){
     for (int q = 0; q < rooms.size(); q++) {
       Facility tempRoom = rooms.get(q);
-      for (Request request : tempRoom.listRequests()) {
+      for (Request request : tempRoom.getRequests()) {
     	  String date	= reservationFormatter(2018, 1, 9, 8, 00);
     	  String worker = "Tom";
         tempRoom.addMaintRecord(request, date, worker);
@@ -214,40 +214,40 @@ class DemoTools{
 
   public void printIssues(Facility complex){
       System.out.println(complex.getName());
-      System.out.println(complex.listIssues());
+      System.out.println(complex.getIssues());
       for (Facility floors : complex.getFacility()) {
           System.out.println(floors.getName());
-          System.out.println(floors.listIssues());
+          System.out.println(floors.getIssues());
           for (Facility rooms : floors.getFacility()) {
               System.out.println(rooms.getName());
-              System.out.println(rooms.listIssues());
+              System.out.println(rooms.getIssues());
           }
       }
   }
 
   public void printRequests(Facility complex){
       System.out.println(complex.getName());
-      System.out.println(complex.listRequests());
+      System.out.println(complex.getRequests());
       for (Facility floors : complex.getFacility()) {
           System.out.println(floors.getName());
-          System.out.println(floors.listRequests());
+          System.out.println(floors.getRequests());
 
           for (Facility rooms : floors.getFacility()) {
               System.out.println(rooms.getName());
-              System.out.println(rooms.listRequests());
+              System.out.println(rooms.getRequests());
           }
       }
   }
 
   public void printRecords(Facility complex){
       System.out.println(complex.getName());
-      System.out.println(complex.listRecords());
+      System.out.println(complex.getRecords());
       for (Facility floors : complex.getFacility()) {
           System.out.println(floors.getName());
-          System.out.println(floors.listRecords());
+          System.out.println(floors.getRecords());
           for (Facility rooms : floors.getFacility()) {
               System.out.println(rooms.getName());
-              System.out.println(rooms.listRecords());
+              System.out.println(rooms.getRecords());
           }
       }
   }
