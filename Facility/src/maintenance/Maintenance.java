@@ -5,12 +5,11 @@ import use.Use;
 import java.util.List;
 
 public interface Maintenance extends Use {
-    public void addIssue(String details, long time, long cost);
     public void addIssue(Issue issue);
     public void removeIssue(Issue fixed);
     public void removeIssue(String id);
     public List<Issue> listIssues();
-    public void makeFacilityMaintRequest(String details, long time, long cost);
+    public void makeFacilityMaintRequest(Request request);
     public void makeFacilityMaintRequest(Issue issue);
     public List<Request> listRequests();
     public void addMaintRecord(Request request, String dateCompleted, String workerName);

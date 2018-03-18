@@ -27,25 +27,25 @@ public class FacilityDemo {
 	  floor0.setName("Basement");
 	  floor0.setInfo("Basement of the complex");
 	  floor0.setCapacity(50);
-	  demo.addRooms(floor0, 0);
+	  demo.addRooms(floor0, 0, context);
 
 	  Facility floor1 = (Facility) context.getBean("facility");
 	  floor1.setName("Floor 1");
 	  floor1.setInfo("First floor of the complex");
 	  floor1.setCapacity(50);
-	  demo.addRooms(floor1, 1);
+	  demo.addRooms(floor1, 1, context);
 
 	  Facility floor2 = (Facility) context.getBean("facility");
 	  floor2.setName("Floor 2");
 	  floor2.setInfo("Second floor of the complex");
 	  floor2.setCapacity(50);
-	  demo.addRooms(floor2, 2);
+	  demo.addRooms(floor2, 2, context);
 
 	  Facility floor3 = (Facility) context.getBean("facility");
 	  floor3.setName("Floor 3");
 	  floor3.setInfo("Third floor of the complex");
 	  floor3.setCapacity(50);
-	  demo.addRooms(floor3, 3);
+	  demo.addRooms(floor3, 3, context);
 
 		// Add floors to large Facility
 	  apartmentComplex.addNewFacility(floor0);
@@ -65,7 +65,7 @@ public class FacilityDemo {
 	  rooms.addAll(floor1.getFacility());
 	  rooms.addAll(floor2.getFacility());
 	  rooms.addAll(floor3.getFacility());
-	  demo.makeReservations(rooms);
+	  demo.makeReservations(rooms, context);
 	  demo.printReservations(apartmentComplex);
 	  String testStart = demo.reservationFormatter(2018, 1, 5, 11, 00);
 	  String testEnd	= demo.reservationFormatter(2018, 1, 5, 12, 30);
@@ -84,7 +84,7 @@ public class FacilityDemo {
 	  demo.makeInspections(rooms);
 	  demo.printInspections(apartmentComplex);
 		// Make room maintenance requests
-	  demo.addIssues(rooms);
+	  demo.addIssues(rooms, context);
 	  demo.printIssues(apartmentComplex);
 		// listMaintRequest();
 	  demo.addRequests(rooms);

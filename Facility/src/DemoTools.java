@@ -5,16 +5,13 @@ import facility.Facility;
 import maintenance.Issue;
 import maintenance.Request;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import use.Inspection;
 import use.UseDetail;
 class DemoTools{
 
-  ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
-
-  public void addRooms(Facility floor, int level){
+  public void addRooms(Facility floor, int level, ApplicationContext context){
     for (int i = 0; i < 5; i++) {
-      Facility newRoom = (Facility) context.getBean("facility");;
+      Facility newRoom = (Facility) context.getBean("facility");
       newRoom.setName("Room "+level+i);
       newRoom.setInfo("Room "+i+" on level "+level);
       newRoom.setCapacity(10);
@@ -107,7 +104,7 @@ class DemoTools{
       }
   }
 
-  public void makeReservations(List<Facility> rooms) throws ParseException{
+  public void makeReservations(List<Facility> rooms, ApplicationContext context) throws ParseException{
       for (int q = 0; q < rooms.size(); q++) {
           Facility tempRoom = rooms.get(q);
           String start0 	= reservationFormatter(2018, 1, 5, 8, 15);
@@ -162,13 +159,19 @@ class DemoTools{
 
   }
 
-  public void addIssues(List<Facility> rooms){
+  public void addIssues(List<Facility> rooms, ApplicationContext context){
     for (int q = 0; q < rooms.size(); q++) {
       Facility tempRoom = rooms.get(q);
       String details = "Issue number " + q;
       long time = (q%3)+1;
       long cost = 100;
-      tempRoom.addIssue(details, time, cost);
+
+      Issue newIssue = (Issue) context.getBean("issue");
+      newIssue.setCost(cost);
+      newIssue.setDetails(details);
+      newIssue.setTime(time);
+
+      tempRoom.addIssue(newIssue);
     }
   }
 
