@@ -10,22 +10,28 @@ public class FacilityImpl implements Facility, Maintenance, Use {
 	private List<Facility> 	subfacilities;
 	private Maintenance 		maintenance;
 	private Use							use;
-// TODO Create setters and getters for class objects
 
 	public FacilityImpl(){ }
 
-	public String toString(){
-		return ("Facility :[ Name : " + this.getName() + ", info : " + this.getInfo() + ", capacity :" + this.getCapacity()+" ]");
-	}
+	public void setFacilityDetails(FacilityDetail details){this.details = details;}
 
-	public void setFacility(List<Facility> subfacilities) {
-		this.subfacilities = subfacilities;
-	}
+	public Maintenance getFacilityDetails(){return this.details;}
 
-	public List<Facility> getFacility(){
-		return this.subfacilities;
-	}
+	public String toString(){return ("Facility :[ Name : " + details.getName() + ", info : " + details.getInfo() + ", capacity :" + details.getCapacity()+" ]");}
 
+	public void setFacility(List<Facility> subfacilities) {this.subfacilities = subfacilities;}
+
+	public List<Facility> getFacility(){return this.subfacilities;}
+
+	public void setMaintenance(Maintenance maintenance){this.maintenance = maintenance;}
+
+	public Maintenance getMaintenance(){return this.maintenance;}
+
+	public void setUse(Use use){this.use = use;}
+
+	public Maintenance getUse(){return this.use;}
+
+//Facility
 	public int numFacilities() {
 		int total = 1;
 		for (Facility subFacility : this.getFacility()) {
@@ -34,13 +40,9 @@ public class FacilityImpl implements Facility, Maintenance, Use {
 		return total;
 	}
 
-	public void addNewFacility(Facility subFacility){
-		subfacilities.add(subFacility);
-	}
+	public void addNewFacility(Facility subFacility){subfacilities.add(subFacility);}
 
-	public void removeFacility(Facility subFacility){
-		subfacilities.remove(subFacility);
-	}
+	public void removeFacility(Facility subFacility){subfacilities.remove(subFacility);}
 
 	public void vacateFacility(UseDetail vacate) throws ParseException{
 		removeObjectsDuringInterval(vacate.getStart(), vacate.getEnd());
@@ -70,6 +72,7 @@ public class FacilityImpl implements Facility, Maintenance, Use {
 		double avg = sumRate / this.numFacilities();
 		return avg;
 	}
+
 
 //Use
 	public void setSimpleDateFormat(SimpleDateFormat sdf){use.setSimpleDateFormat(sdf);}
