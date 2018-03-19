@@ -5,7 +5,7 @@ import java.util.List;
 import maintenance.MaintenanceImpl;
 import use.UseDetail;
 
-public class FacilityImpl implements Facility, Maintenance, Use {
+public class FacilityImpl implements Facility{
 	private FacilityDetail 	details;
 	private List<Facility> 	subfacilities;
 	private Maintenance 		maintenance;

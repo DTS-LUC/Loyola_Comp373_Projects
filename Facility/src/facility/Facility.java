@@ -6,7 +6,7 @@ import use.UseDetail;
 import java.text.ParseException;
 import java.util.List;
 
-public interface Facility extends Maintenance{
+public interface Facility extends Maintenance, Use{
     public List<Facility> getFacility();
     public void setFacility(List<Facility> facilities);
     public int numFacilities();
