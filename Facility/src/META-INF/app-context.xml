@@ -55,12 +55,12 @@
 	</bean>
 
 	<bean id="facility" class="facility.FacilityImpl" scope="prototype">
-		<property name="facilityDetails" ref bean="facilityDetail"/>
+		<property name="facilityDetails" ref="facilityDetail"/>
 		<property name="facility">
 			<list/>
 		</property>
-		<property name="maintenance" ref bean="maintenance">
-		<property name="use" ref bean="use"/>
+		<property name="maintenance" ref="maintenance">
+		<property name="use" ref="use"/>
 
 	</bean>
 
