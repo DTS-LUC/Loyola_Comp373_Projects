@@ -85,7 +85,7 @@ public class FacilityDemo {
 	  demo.addIssues(apartmentComplex.getFacility(), context);
 	  demo.printIssues(apartmentComplex);
 		// listMaintRequest();
-	  demo.addRequests(apartmentComplex.getFacility());
+	  demo.addRequests(apartmentComplex.getFacility(), context);
 	  demo.printRequests(apartmentComplex);
 
 		// calculate cost
@@ -96,7 +96,7 @@ public class FacilityDemo {
 	  demo.printProblemRate(apartmentComplex);
 
 		// Schedule maintenance
-	  demo.performMaint(apartmentComplex.getFacility());
+	  demo.performMaint(apartmentComplex.getFacility(), context);
 	  demo.printIssues(apartmentComplex);
 
 		// listMaintenance();

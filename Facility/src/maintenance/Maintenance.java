@@ -11,10 +11,9 @@ public interface Maintenance{
     public List<Issue> getIssues();
     public void setIssues(List<Issue> issues);
     public void makeFacilityMaintRequest(Request request);
-    public void makeFacilityMaintRequest(Issue issue);
     public List<Request> getRequests();
     public void setRequests(List<Request> requests);
-    public void addMaintRecord(Request request, String dateCompleted, String workerName);
+    public void addMaintRecord(Request request, Record record, String dateCompleted, String workerName);
     public List<Record> getRecords();
     public void setRecords(List<Record> records);
     public long calcMaintenanceCost();

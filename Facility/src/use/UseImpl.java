@@ -31,14 +31,16 @@ public class UseImpl implements Use {
 		Date checkEnd   = sdf.parse(end);
 
 		for (UseDetail reservation: usageHistory) {
-			Date reservationEnd = sdf.parse(reservation.getEnd());
-			Date reservationStart = sdf.parse(reservation.getStart());
+			if (reservation.getEnd() != null) {
+				Date reservationEnd = sdf.parse(reservation.getEnd());
+				Date reservationStart = sdf.parse(reservation.getStart());
 
-			if ((checkStart.compareTo(reservationStart) >= 0 && checkStart.compareTo(reservationEnd) <= 0) ||
-					(checkEnd.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0) ||
-					(checkStart.compareTo(reservationStart) <= 0 && checkEnd.compareTo(reservationEnd) >= 0) ||
-					(checkStart.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0)) {
-				return true;
+				if ((checkStart.compareTo(reservationStart) >= 0 && checkStart.compareTo(reservationEnd) <= 0) ||
+						(checkEnd.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0) ||
+						(checkStart.compareTo(reservationStart) <= 0 && checkEnd.compareTo(reservationEnd) >= 0) ||
+						(checkStart.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0)) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -58,14 +60,16 @@ public class UseImpl implements Use {
 		for (int i = 0; i < usageHistory.size(); i++) {
 			UseDetail reservation = usageHistory.get(i);
 
-			Date reservationEnd = sdf.parse(reservation.getEnd());
-			Date reservationStart = sdf.parse(reservation.getStart());
+			if (reservation.getEnd() != null) {
+				Date reservationEnd = sdf.parse(reservation.getEnd());
+				Date reservationStart = sdf.parse(reservation.getStart());
 
-			if ((checkStart.compareTo(reservationStart) >= 0 && checkStart.compareTo(reservationEnd) <= 0) ||
-					(checkEnd.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0) ||
-					(checkStart.compareTo(reservationStart) <= 0 && checkEnd.compareTo(reservationEnd) >= 0) ||
-					(checkStart.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0)) {
-				this.usageHistory.remove(i);
+				if ((checkStart.compareTo(reservationStart) >= 0 && checkStart.compareTo(reservationEnd) <= 0) ||
+						(checkEnd.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0) ||
+						(checkStart.compareTo(reservationStart) <= 0 && checkEnd.compareTo(reservationEnd) >= 0) ||
+						(checkStart.compareTo(reservationStart) >= 0 && checkEnd.compareTo(reservationEnd) <= 0)) {
+					this.usageHistory.remove(i);
+				}
 			}
 		}
 	}
