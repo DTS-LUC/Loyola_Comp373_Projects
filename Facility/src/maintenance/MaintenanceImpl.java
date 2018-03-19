@@ -1,8 +1,5 @@
 package maintenance;
 
-import use.Use;
-import use.UseImpl;
-
 import java.util.List;
 
 public class MaintenanceImpl implements Maintenance{

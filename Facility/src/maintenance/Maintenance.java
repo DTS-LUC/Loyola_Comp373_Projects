@@ -1,7 +1,5 @@
 package maintenance;
 
-import use.Use;
-
 import java.util.List;
 
 public interface Maintenance{
