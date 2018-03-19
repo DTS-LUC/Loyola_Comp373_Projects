@@ -41,7 +41,7 @@
 		</property>
 	</bean>
 
-	<bean id="maintenance" class="maintenance.MaintenanceImpl" parent="use" scope="prototype">
+	<bean id="maintenance" class="maintenance.MaintenanceImpl" scope="prototype">
 		<property name="issues">
 			<list/>
 		</property>
@@ -54,19 +54,14 @@
 		<property name="simpleDateFormat" ref="simpleDateFormat" />
 	</bean>
 
-	<bean id="facility" class="facility.FacilityImpl" parent="maintenance" scope="prototype">
-		<property name="facilityDetails">
-			<ref bean="facilityDetail"/>
-		</property>
+	<bean id="facility" class="facility.FacilityImpl" scope="prototype">
+		<property name="facilityDetails" ref bean="facilityDetail"/>
 		<property name="facility">
 			<list/>
 		</property>
-		<property name="maintenance">
-			<ref bean="maintenance"/>
-		</property>
-		<property name="use">
-			<ref bean="use"/>
-		</property>
+		<property name="maintenance" ref bean="maintenance">
+		<property name="use" ref bean="use"/>
+
 	</bean>
 
 	<bean id="demoTools" class="DemoTools" scope="prototype" />
