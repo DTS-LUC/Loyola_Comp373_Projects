@@ -192,11 +192,13 @@ class DemoTools{
     }
   }
 
-  public void addRequests(List<Facility> rooms){
+  public void addRequests(List<Facility> rooms, ApplicationContext context){
     for (int q = 0; q < rooms.size(); q++) {
       Facility tempRoom = rooms.get(q);
       for (Issue issue : tempRoom.getIssues()) {
-        tempRoom.makeFacilityMaintRequest(issue);
+          Request request = (Request) context.getBean("request");
+          request.setIssue(issue);
+          tempRoom.makeFacilityMaintRequest(request);
       }
     }
   }

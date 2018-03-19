@@ -38,6 +38,7 @@ public class UseDetailImpl implements UseDetail {
 	}
 
 	public double getDuration() throws ParseException{
+		if (start == null) return 0;
 		Date dateStart = sdf.parse(this.getStart());
 		Date dateEnd = sdf.parse(this.getEnd());
 		long milliseconds = dateEnd.getTime() - dateStart.getTime();

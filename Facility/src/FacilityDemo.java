@@ -85,7 +85,7 @@ public class FacilityDemo {
 	  demo.addIssues(apartmentComplex.getFacility(), context);
 	  demo.printIssues(apartmentComplex);
 		// listMaintRequest();
-	  demo.addRequests(apartmentComplex.getFacility());
+	  demo.addRequests(apartmentComplex.getFacility(), context);
 	  demo.printRequests(apartmentComplex);
 
 		// calculate cost

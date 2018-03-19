@@ -33,12 +33,6 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
 
     public void makeFacilityMaintRequest(Request request){ maintenanceRequests.add(request); }
 
-    public void makeFacilityMaintRequest(Issue issue){
-      Request request = (Request) issue;
-      request.setIssue(issue);
-      maintenanceRequests.add(request);
-    }
-
     public List<Request> getRequests() {return this.maintenanceRequests;}
 
     public void setRequests(List<Request> requests) {this.maintenanceRequests = requests;}
