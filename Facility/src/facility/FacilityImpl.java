@@ -1,8 +1,15 @@
 package facility;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import maintenance.MaintenanceImpl;
+
+import maintenance.Issue;
+import maintenance.Maintenance;
+import maintenance.Record;
+import maintenance.Request;
+import use.Inspection;
+import use.Use;
 import use.UseDetail;
 
 public class FacilityImpl implements Facility{
@@ -15,7 +22,7 @@ public class FacilityImpl implements Facility{
 
 	public void setFacilityDetails(FacilityDetail details){this.details = details;}
 
-	public Maintenance getFacilityDetails(){return this.details;}
+	public FacilityDetail getFacilityDetails(){return this.details;}
 
 	public String toString(){return ("Facility :[ Name : " + details.getName() + ", info : " + details.getInfo() + ", capacity :" + details.getCapacity()+" ]");}
 
@@ -29,7 +36,25 @@ public class FacilityImpl implements Facility{
 
 	public void setUse(Use use){this.use = use;}
 
-	public Maintenance getUse(){return this.use;}
+	public Use getUse(){return this.use;}
+
+//Details
+	@Override
+	public void setName(String name) {details.setName(name);}
+
+	@Override
+	public String getName() {return details.getName();}
+
+	@Override
+	public void setInfo(String info) {details.setInfo(info);}
+	@Override
+	public String getInfo() {return details.getInfo();}
+
+	@Override
+	public void setCapacity(int capacity) {details.setCapacity(capacity);}
+
+	@Override
+	public int getCapacity() {return details.getCapacity();}
 
 //Facility
 	public int numFacilities() {
@@ -67,6 +92,7 @@ public class FacilityImpl implements Facility{
 	public double avgTotalProblemRate(){
 		long sumRate = 0;
 		for (Facility subFacility : subfacilities) {
+			//double uses   = this.getUseDetails().size();
 			sumRate += subFacility.calcProblemRate();
 		}
 		double avg = sumRate / this.numFacilities();
@@ -94,13 +120,18 @@ public class FacilityImpl implements Facility{
 	public List<Issue> getIssues(){return maintenance.getIssues();}
 	public void setIssues(List<Issue> issues){maintenance.setIssues(issues);}
 	public void makeFacilityMaintRequest(Request request){maintenance.makeFacilityMaintRequest(request);}
-	public void makeFacilityMaintRequest(Issue issue){maintenance.makeFacilityMaintRequest(issue);}
+	//public void makeFacilityMaintRequest(Issue issue){maintenance.makeFacilityMaintRequest(issue);}
 	public List<Request> getRequests(){return maintenance.getRequests();}
 	public void setRequests(List<Request> requests){maintenance.setRequests(requests);}
-	public void addMaintRecord(Request request, String dateCompleted, String workerName){maintenance.addMaintRecord(request, dateCompleted, workerName);}
+	public void addMaintRecord(Request request,  Record record, String dateCompleted, String workerName){
+		maintenance.addMaintRecord(request, record, dateCompleted, workerName);}
 	public List<Record> getRecords(){return maintenance.getRecords();}
 	public void setRecords(List<Record> records){maintenance.setRecords(records);}
 	public long calcMaintenanceCost(){return maintenance.calcMaintenanceCost();}
 	public long calcDowntime(){return maintenance.calcDowntime();}
-	public double calcProblemRate(){return maintenance.calcProblemRate();}
+	public double calcProblemRate(){
+		double uses = this.getUseDetails().size();
+		return maintenance.calcProblemRate(uses);
+	}
+	public double calcProblemRate(double uses) {return maintenance.calcProblemRate(uses);}
 }

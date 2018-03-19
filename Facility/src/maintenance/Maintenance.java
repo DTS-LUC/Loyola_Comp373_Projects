@@ -18,5 +18,5 @@ public interface Maintenance{
     public void setRecords(List<Record> records);
     public long calcMaintenanceCost();
     public long calcDowntime();
-    public double calcProblemRate();
+    public double calcProblemRate(double uses);
 }
