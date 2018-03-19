@@ -13,7 +13,7 @@ public interface Maintenance extends Use {
     public void makeFacilityMaintRequest(Request request);
     public List<Request> getRequests();
     public void setRequests(List<Request> requests);
-    public void addMaintRecord(Request request, String dateCompleted, String workerName);
+    public void addMaintRecord(Request request, Record record, String dateCompleted, String workerName);
     public List<Record> getRecords();
     public void setRecords(List<Record> records);
     public long calcMaintenanceCost();

@@ -96,7 +96,7 @@ public class FacilityDemo {
 	  demo.printProblemRate(apartmentComplex);
 
 		// Schedule maintenance
-	  demo.performMaint(apartmentComplex.getFacility());
+	  demo.performMaint(apartmentComplex.getFacility(), context);
 	  demo.printIssues(apartmentComplex);
 
 		// listMaintenance();
