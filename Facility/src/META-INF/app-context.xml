@@ -29,7 +29,7 @@
 
 	<bean id="date" class="java.util.Date" scope="singleton"/>
 
-	<bean id="use" class="use.UseImpl" parent="facilityDetail" scope="prototype">
+	<bean id="use" class="use.UseImpl" scope="prototype">
 		<property name="useDetails">
 			<list>
 				<ref bean="useDetail"/>
@@ -50,7 +50,6 @@
 		<property name="records">
 			<list/>
 		</property>
-		<property name="simpleDateFormat" ref="simpleDateFormat" />
 	</bean>
 
 	<bean id="facility" class="facility.FacilityImpl" scope="prototype">
