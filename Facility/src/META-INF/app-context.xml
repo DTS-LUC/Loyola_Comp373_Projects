@@ -38,6 +38,7 @@
 		<property name="inspections">
 			<list/>
 		</property>
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
 	</bean>
 
 	<bean id="maintenance" class="maintenance.MaintenanceImpl" scope="prototype">
