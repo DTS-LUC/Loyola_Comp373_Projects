@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<description>Wiring the dependencies for the Facility Application.</description>
+
+	<bean id="issue" class="maintenance.IssueImpl" scope="prototype" />
+
+	<!-- with help from: https://stackoverflow.com/questions/23449908/spring-java-util-date-bean -->
+	<bean id="simpleDateFormat" class="java.text.SimpleDateFormat" scope="singleton">
+		<constructor-arg value="yyyy-MM-dd'T'HH:mm:ss.SSSZ"/>
+	</bean>
+
+	<bean id="request" class="maintenance.RequestImpl" parent="issue" scope="prototype">
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
+	</bean>
+
+	<bean id="record" class="maintenance.RecordImpl" parent="request" scope="prototype">
+	</bean>
+
+	<bean id="inspection" class="use.InspectionImpl" parent="useDetail" scope="prototype">
+	</bean>
+
+	<bean id="facilityDetail" class="facility.FacilityDetailImpl" scope="prototype">
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
+	</bean>
+
+	<bean id="date" class="java.util.Date" scope="singleton"/>
+
+	<bean id="use" class="use.UseImpl" parent="facilityDetail" scope="prototype">
+		<property name="useDetails">
+			<list>
+				<ref bean="useDetail"/>
+			</list>
+		</property>
+		<property name="inspections">
+			<list/>
+		</property>
+	</bean>
+
+	<bean id="maintenance" class="maintenance.MaintenanceImpl" parent="use" scope="prototype">
+		<property name="issues">
+			<list/>
+		</property>
+		<property name="requests">
+			<list/>
+		</property>
+		<property name="records">
+			<list/>
+		</property>
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
+	</bean>
+
+	<bean id="facility" class="facility.FacilityImpl" parent="maintenance" scope="prototype">
+		<property name="facility">
+			<list/>
+		</property>
+	</bean>
+
+	<bean id="demoTools" class="DemoTools" scope="prototype" />
+
+	<bean id="useDetail" class="use.UseDetailImpl" scope="prototype">
+		<property name="simpleDateFormat" ref="simpleDateFormat"/>
+	</bean>
+
+</beans>
