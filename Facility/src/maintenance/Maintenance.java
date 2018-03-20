@@ -1,10 +1,8 @@
 package maintenance;
 
-import use.Use;
-
 import java.util.List;
 
-public interface Maintenance extends Use {
+public interface Maintenance{
     public void addIssue(Issue issue);
     public void removeIssue(Issue fixed);
     public void removeIssue(String id);
@@ -18,5 +16,5 @@ public interface Maintenance extends Use {
     public void setRecords(List<Record> records);
     public long calcMaintenanceCost();
     public long calcDowntime();
-    public double calcProblemRate();
+    public double calcProblemRate(double uses);
 }

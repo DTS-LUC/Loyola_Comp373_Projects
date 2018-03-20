@@ -25,12 +25,11 @@
 	</bean>
 
 	<bean id="facilityDetail" class="facility.FacilityDetailImpl" scope="prototype">
-		<property name="simpleDateFormat" ref="simpleDateFormat" />
 	</bean>
 
 	<bean id="date" class="java.util.Date" scope="singleton"/>
 
-	<bean id="use" class="use.UseImpl" parent="facilityDetail" scope="prototype">
+	<bean id="use" class="use.UseImpl" scope="prototype">
 		<property name="useDetails">
 			<list>
 				<ref bean="useDetail"/>
@@ -39,9 +38,10 @@
 		<property name="inspections">
 			<list/>
 		</property>
+		<property name="simpleDateFormat" ref="simpleDateFormat" />
 	</bean>
 
-	<bean id="maintenance" class="maintenance.MaintenanceImpl" parent="use" scope="prototype">
+	<bean id="maintenance" class="maintenance.MaintenanceImpl" scope="prototype">
 		<property name="issues">
 			<list/>
 		</property>
@@ -51,13 +51,16 @@
 		<property name="records">
 			<list/>
 		</property>
-		<property name="simpleDateFormat" ref="simpleDateFormat" />
 	</bean>
 
-	<bean id="facility" class="facility.FacilityImpl" parent="maintenance" scope="prototype">
+	<bean id="facility" class="facility.FacilityImpl" scope="prototype">
+		<property name="facilityDetails" ref="facilityDetail"/>
 		<property name="facility">
 			<list/>
 		</property>
+		<property name="maintenance" ref="maintenance"/>
+		<property name="use" ref="use"/>
+
 	</bean>
 
 	<bean id="demoTools" class="DemoTools" scope="prototype" />

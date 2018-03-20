@@ -1,7 +1,6 @@
 package maintenance;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class RequestImpl extends IssueImpl implements Request{
 
