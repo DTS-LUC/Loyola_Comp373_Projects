@@ -1,5 +1,22 @@
 ### COMP 373/473 - Objects/Frameworks/Patterns
 
+COMP 373/473 - Objects/Frameworks/Patterns
+# Project 2: Object Wiring Using Spring – A Facility Management System
+
+**Objective:** In this project, we will change the object dependency and collaboration management from directly instantiating to Dependency Injection container (Spring).
+
+Domain Modeling and implementation
+
+Implementing Dependency Injection using Spring
+
+You need to design and implement:
+
+– Spring container configuration for Dependency Injection for the application that you developed in Project 1.
+
+– Using ApplicationContext Mechanism
+
+– Dependency relationship using XML
+
 # Project 1: Facility Management System
 
 **To Run:**
