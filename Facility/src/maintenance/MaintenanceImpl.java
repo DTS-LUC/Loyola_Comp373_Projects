@@ -67,7 +67,7 @@ public class MaintenanceImpl implements Maintenance{
       // Problem rate = Issues per use
       double issues = this.getIssues().size();
 		// NOTE Issue here, will need to access number of uses another way
-			// - Can definetly just have that sent in the function parameters
+			// - Can definitely just have that sent in the function parameters
       //double uses   = this.getUseDetails().size();
       double rate = issues/uses;
 

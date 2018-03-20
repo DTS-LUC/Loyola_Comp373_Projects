@@ -25,7 +25,6 @@
 	</bean>
 
 	<bean id="facilityDetail" class="facility.FacilityDetailImpl" scope="prototype">
-		<property name="simpleDateFormat" ref="simpleDateFormat" />
 	</bean>
 
 	<bean id="date" class="java.util.Date" scope="singleton"/>
@@ -59,7 +58,7 @@
 		<property name="facility">
 			<list/>
 		</property>
-		<property name="maintenance" ref="maintenance">
+		<property name="maintenance" ref="maintenance"/>
 		<property name="use" ref="use"/>
 
 	</bean>

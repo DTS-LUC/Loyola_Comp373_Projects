@@ -1,6 +1,5 @@
 package use;
 
-import facility.FacilityDetail;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
