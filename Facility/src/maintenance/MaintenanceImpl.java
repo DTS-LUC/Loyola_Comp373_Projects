@@ -1,11 +1,8 @@
 package maintenance;
 
-import use.Use;
-import use.UseImpl;
-
 import java.util.List;
 
-public class MaintenanceImpl extends UseImpl implements Maintenance{
+public class MaintenanceImpl implements Maintenance{
 
     private List<Issue> facilityIssues;
     private List<Request> maintenanceRequests;
@@ -66,12 +63,15 @@ public class MaintenanceImpl extends UseImpl implements Maintenance{
       return time;
     }
 
-    public double calcProblemRate(){
+    public double calcProblemRate(double uses){
       // Problem rate = Issues per use
       double issues = this.getIssues().size();
-      double uses   = this.getUseDetails().size();
+		// NOTE Issue here, will need to access number of uses another way
+			// - Can definitely just have that sent in the function parameters
+      //double uses   = this.getUseDetails().size();
       double rate = issues/uses;
 
       return rate;
     }
+
 }
